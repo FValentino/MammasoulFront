@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import Card from "./card"
+import Card from "./productCard"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 interface Product {

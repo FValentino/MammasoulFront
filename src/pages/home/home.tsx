@@ -1,6 +1,5 @@
 import Header from "../../components/home/header/header";
-import Menu from "../../components/menu/menu";
-import ProductCarousel from "../../components/productCarousel.tsx";
+import ProductCarousel from "../../components/products/productCarousel.tsx";
 
 // Datos de ejemplo para productos destacados
 const featuredProducts = [
@@ -75,7 +74,6 @@ const saleProducts = [
 export default function Home() {
   return (
     <div className="min-h-screen">
-      <Menu />
 
       {/* Banner principal */}
       <Header />
@@ -85,13 +83,6 @@ export default function Home() {
 
       {/* Productos en oferta */}
       <ProductCarousel title="Productos en Oferta" id="productos en oferta" products={saleProducts} />
-
-      {/* Footer simple */}
-      <footer className="bg-card border-t border-border py-8 mt-12">
-        <div className="container mx-auto px-4 text-center">
-          <p className="text-muted-foreground">© 2024 Mammasoul. Marroquinería sostenible y elegante.</p>
-        </div>
-      </footer>
     </div>
   );
 }

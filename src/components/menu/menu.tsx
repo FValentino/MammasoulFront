@@ -22,8 +22,8 @@ export default function Menu() {
 
             <div className={`${isMenuOpen ? 'flex justify-between items-center border-b-2 pb-2' 
                                           : 'w-full flex justify-between items-center md:w-1/2 '}`}>
-              <Link to="/" className="text-3xl font-bold text-primary ms-4 md:mx-auto">
-                Mammasoul
+              <Link to="/" className=" md:mx-auto">
+                <h1 translate="no" className="text-3xl font-bold text-primary ms-4">Mammasoul</h1>
               </Link>
               <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X className="w-6 h-6 me-4" /> : <MenuIcon className="w-8 h-8 me-4"/>}
