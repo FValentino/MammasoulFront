@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Menu as MenuIcon, X, User } from "lucide-react"
+import { Menu as MenuIcon, X, User, ShoppingCart } from "lucide-react"
 import { useState } from "react"; 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -41,6 +41,11 @@ export default function Menu() {
               </button>
               <button className={`text-start font-medium  ${isMenuOpen ? 'text-xl' : ''}`}>
                 Registrarse
+              </button>
+              <button>
+                <Link to="/carrito" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+                  <ShoppingCart />
+                </Link>
               </button>
             </div>
           </div>
