@@ -4,15 +4,8 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import Card from "./productCard"
 import { ChevronLeft, ChevronRight } from "lucide-react"
+import type { Product } from "../../types/product"
 
-interface Product {
-  id: number
-  name: string
-  price: number
-  originalPrice?: number
-  image: string
-  isOnSale?: boolean
-}
 
 interface ProductCarouselProps {
   title: string
@@ -108,7 +101,7 @@ export default function ProductCarousel({ title, id, products }: ProductCarousel
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                 >
-                  <Card name={product.name} price={product.price} image={product.image} />
+                  <Card product={product} />
                 </motion.div>
               ))}
             </motion.div>

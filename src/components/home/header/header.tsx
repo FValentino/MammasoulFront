@@ -68,7 +68,7 @@ export default function Header() {
             className="absolute inset-0"
           >
             <img
-              src={""}
+              src="/minimalist-leather-accessories.png"
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black/40" />

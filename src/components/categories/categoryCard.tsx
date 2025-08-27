@@ -14,7 +14,7 @@ export default function Card ({id, name, image}: CardProps) {
       <img src={image} alt={name} className="w-full h-48 object-cover" />
 
       <div className="p-2 flex flex-col gap-2">
-        <Link to={`/categoria/${id}`} state={{name: name}}
+        <Link to={`/categoria/${id}`} state={{name: name, id:id}}
           className="text-center mt-2 bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
           {name}
         </Link>

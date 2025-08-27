@@ -16,6 +16,7 @@ export default function Card ({product}: CardProps) {
       price: product.price,
       image: product.image,
       stock: product.stock,
+      category: product.category,
       quantity: 1
     }
     let products:string|null|ProductCart[] = localStorage.getItem("shoppingCart");
