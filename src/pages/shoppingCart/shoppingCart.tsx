@@ -1,18 +1,31 @@
+import { useEffect, useState } from "react";
 import CartDetail from "../../components/shoppingCart/cartDetail/cartDetail";
 import ProductsDetail from "../../components/shoppingCart/productsDetail/productsDetail";
+import type { ProductCart } from "../../types/product";
 
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  image: string;  
-  stock: number;
-}
-interface ShoppingCartProps {
-  products: Product[];
-}
 
-export default function ShoppingCart({products}: ShoppingCartProps) {
+export default function ShoppingCart() {
+  const [products, setProducts] = useState<ProductCart[]>( ()=>{
+    const actualCart = localStorage.getItem("shoppingCart");
+    return actualCart ? JSON.parse(actualCart) as ProductCart[] : [];
+  });
+
+  useEffect(()=>{
+    localStorage.setItem("shoppingCart", JSON.stringify(products))
+  },[products])
+
+  const handleRemoveProduct = (pos: number) => {
+    const newProducts = [...products]
+    newProducts.splice(pos,1)
+    setProducts(newProducts);
+  };
+
+  const handleUpdate = (pos:number, newQuantity:number)=>{
+    const productsAux = [...products];
+    productsAux[pos].quantity =  newQuantity
+    setProducts(productsAux)
+  }
+
   return (
     <section className="container mx-auto">
       <div className="h-10 font-bold my-2">
@@ -27,13 +40,12 @@ export default function ShoppingCart({products}: ShoppingCartProps) {
                           md:flex-row md:justify-between md:items-start ">
             <div className="w-full me-0 flex flex-col justify-center items-center border-1 rounded-lg
                             md:w-2/3 md: me-1">
-              {products.map((product) => (
+              {products.map((product, index) => (
                 <ProductsDetail 
                   key={product.id}
-                  name={product.name} 
-                  price={product.price} 
-                  imageUrl={product.image}
-                  stock={product.stock}
+                  product={product}
+                  onRemove={()=>handleRemoveProduct(index)}
+                  onUpdate={(newQuantity:number)=>handleUpdate(index, newQuantity)}
                 />
               ))}
             </div>
@@ -43,8 +55,8 @@ export default function ShoppingCart({products}: ShoppingCartProps) {
                 <h3 className="text-xl font-medium">Resumen de la compra</h3>
               </div>
               <CartDetail 
-                productsPrice={products.reduce((acc, product) => acc + product.price * product.stock, 0)} 
-                total={products.reduce((acc, product) => acc + product.price * product.stock, 0)}   
+                productsPrice={products.reduce((acc, product) => acc + product.price * product.quantity, 0)} 
+                total={products.reduce((acc, product) => acc + product.price * product.quantity, 0)}   
               />
             </div>
           </div>

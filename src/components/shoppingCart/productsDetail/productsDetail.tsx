@@ -1,28 +1,30 @@
 import { useState } from "react";
 import styles from "./product.module.css"
 import { Minus, Plus, X } from "lucide-react";
+import type { Product } from "../../../types/product";
 
 interface ProductsDetailProps {
-  name:string;
-  price:number;
-  imageUrl:string;  
-  stock:number;
+  product: Product;
+  onRemove: () => void;
+  onUpdate: (quantity:number) => void;
 }
 
-export default function ProductsDetail({name, price, imageUrl, stock}: ProductsDetailProps) {
+export default function ProductsDetail({product, onRemove, onUpdate}: ProductsDetailProps) {
   
   const [quantity, setQuantity] = useState<number>(1);
 
   const handleQuantityAdd = () => {
-    if (quantity >= stock) return;
+    if (quantity >= product.stock) return;
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
+    onUpdate(newQuantity)
   }
 
   const handleQuantitySubtract = () => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
+      onUpdate(newQuantity)
     }
   }
 
@@ -31,14 +33,14 @@ export default function ProductsDetail({name, price, imageUrl, stock}: ProductsD
       <div className="w-1/2 flex justify-around items-center "> 
         <div className="w-1/3">
           <img
-            src={imageUrl}
+            src={product.image}
             alt="Product"
             className="w-16 h-16 mx-auto object-cover rounded-lg border-1 border-gray-300"
           />
         </div>
         <div className="w-2/3 ">
-          <p className="text-lg font-semibold truncate">{name}</p>
-          <p className="text-gray-600">$ {price}</p>
+          <p className="text-lg font-semibold truncate">{product.name}</p>
+          <p className="text-gray-600">$ {product.price}</p>
         </div>
       </div>
 
@@ -54,7 +56,6 @@ export default function ProductsDetail({name, price, imageUrl, stock}: ProductsD
             id="quantity"
             name="quantity"
             min="1"
-            defaultValue="1"
             value={quantity}
             disabled
             className={`${styles.inputNumber} border-x-2 w-10 h-auto  rounded text-center`}
@@ -66,7 +67,8 @@ export default function ProductsDetail({name, price, imageUrl, stock}: ProductsD
 
         </div>
           
-        <button className="p-3  bg-red-500 text-white text-center rounded-lg border-1 border-[black] hover:bg-red-600 hover:cursor-pointer ">
+        <button onClick={()=>{onRemove()}}
+          className="p-3 bg-red-500 text-white text-center rounded-lg border-1 border-[black] hover:bg-red-600 hover:cursor-pointer ">
           <X />
         </button>
       </div>
