@@ -2,27 +2,23 @@ import { useLocation } from "react-router-dom";
 import type {Product } from "../../types/product";
 import Card from "../../components/products/productCard"
 import BackButton from "../../components/ui/backButton";
-import {productsData} from "../../services/productService"
+import {getAllProducts, findProductsByCategory} from "../../services/productService"
 import { useEffect, useState } from "react";
 
 export default function Products() {
-  const [products, setProducts] = useState<Product[]>(productsData);
+  const [products, setProducts] = useState<Product[]>(getAllProducts());
   const [title, setTitle] = useState<string>("Todos los productos")
   const location = useLocation();
 
   useEffect(()=>{
     if (location.state){
-      console.log("Entro al if de useEffect: ",location.state.id)
-      const productsAux = products.filter((product) => product.category === location.state.id)
-      console.log("Product aux: ", productsAux)
+      const productsAux = findProductsByCategory(location.state.id)
       setTitle(location.state.name);
       if (productsAux.length > 0){
         setProducts(productsAux)
       }else{
         setProducts([])
       }
-    }else{
-      setProducts(productsData)
     }
   }, [location.state]);
 

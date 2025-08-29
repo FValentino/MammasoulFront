@@ -54,9 +54,9 @@ export default function ProductCarousel({ title, id, products }: ProductCarousel
   return (
     <section id={id} className="py-12">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-center mb-8">
           <motion.h2
-            className="text-3xl font-bold text-foreground font-space-grotesk"
+            className="text-3xl font-bold text-foreground font-space-grotesk text-center"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}

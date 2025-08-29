@@ -1,4 +1,6 @@
-export const CategoriesData =[
+import type { Category } from "../types/category";
+
+const categoriesData =[
   {
     id: 1,
     name: "Bolsos",
@@ -30,3 +32,18 @@ export const CategoriesData =[
     image: "/modern-sustainable-fanny-pack.png",
   },
 ]
+
+//get all categories
+export function getAllcategories():Category[]{
+  return(categoriesData)
+}
+
+//find Category by id
+export function getCategoryById(id:number):Category|string{
+  const category = categoriesData.find((cat)=>cat.id === id)
+  if (category){
+    return (category);
+  }else{
+    return "Categoryo no encontrado"
+  }
+}

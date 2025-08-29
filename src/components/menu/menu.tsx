@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Menu as MenuIcon, X, User, ShoppingCart } from "lucide-react"
+import { Menu as MenuIcon, X, ShoppingCart } from "lucide-react"
 import { useState } from "react"; 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -12,11 +12,11 @@ export default function Menu() {
                                         : 'w-full flex justify-between items-center h-16 md:w-2/3'}`}>
             <nav className={`${isMenuOpen ? 'flex flex-col space-y-4 mt-6 mx-4' 
                                           : 'hidden md:flex md:w-1/2 md:justify-around '}`}>
-              <Link to="/productos" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
-                Productos
+              <Link to="/" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+                Inicio
               </Link>
-              <Link to="/categorias" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
-                Categorías
+              <Link to="/contacto" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+                Contacto
               </Link>
             </nav>
 
@@ -31,22 +31,19 @@ export default function Menu() {
             </div>
           </div>
 
-          {/* login */}
+          
           <div className={`${isMenuOpen ? 'w-full md:hidden py-4' 
                                         : 'hidden md:flex md:w-1/3 md:h-16 md:justify-center md:items-center'}`}>
             <div className={`${isMenuOpen ? 'mx-4 flex flex-col space-y-4' : 'md:w-[90%] flex justify-around'}`}>
-              <button className={`flex font-medium items-center ${isMenuOpen ? 'text-xl' : ''}`}>
-                <User className={`${isMenuOpen ? 'hidden' : 'w-4 h-4 ms-2 me-2'}`} />
-                Iniciar Sesión
-              </button>
-              <button className={`text-start font-medium  ${isMenuOpen ? 'text-xl' : ''}`}>
-                Registrarse
-              </button>
-              <button>
-                <Link to="/carrito" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
-                  <ShoppingCart />
-                </Link>
-              </button>
+              <Link to="/productos" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+                Productos
+              </Link>
+              <Link to="/categorias" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+                Categorías
+              </Link>
+              <Link to="/carrito" className={`font-medium  ${isMenuOpen ? 'text-xl' : ''}`}>
+                <ShoppingCart />
+              </Link>
             </div>
           </div>
         </div>

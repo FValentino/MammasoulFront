@@ -6,6 +6,7 @@ import Menu from "./components/menu/menu"
 import Products from "./pages/products/products"
 import Footer from "./components/footer/footer"
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
+import ProductDetail from "./pages/products/productDetail"
 
 //Imagen de prueba
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/categorias" element={<Categories/>} />
         <Route path="/categoria/:id" element={<Products/>} />
         <Route path="/productos" element={<Products/>} />
+        <Route path="/productos/:id" element={<ProductDetail/>} />
         <Route path="/carrito" element={<ShoppingCart />}/>
       </Routes>
 
