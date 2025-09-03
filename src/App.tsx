@@ -7,6 +7,7 @@ import Products from "./pages/products/products"
 import Footer from "./components/footer/footer"
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import ProductDetail from "./pages/products/productDetail"
+import PaymentNotification from "./pages/shoppingCart/paymentNotification"
 
 //Imagen de prueba
 
@@ -26,8 +27,10 @@ function App() {
         <Route path="/productos" element={<Products/>} />
         <Route path="/productos/:id" element={<ProductDetail/>} />
         <Route path="/carrito" element={<ShoppingCart />}/>
+        <Route path="/compra/aprobada" element={<PaymentNotification approved={true}/>} />
+        <Route path="/compra/rechazada" element={<PaymentNotification approved={false}/>} />
       </Routes>
-
+      
       <Footer />
     </Router>
   )

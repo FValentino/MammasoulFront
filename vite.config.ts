@@ -12,5 +12,6 @@ export default defineConfig({
     watch: {
       usePolling: true
     },
+    allowedHosts: ["https://seven-ads-shave.loca.lt"]
   },
 })
