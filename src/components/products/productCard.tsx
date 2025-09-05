@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../types/product";
-import { handleAddToCart } from "../../services/shoppingCartService";
+import { useCart } from "../../context/cartContext";
 
 interface CardProps {
   product: Product;
@@ -9,7 +9,8 @@ interface CardProps {
 export default function Card ({product}: CardProps) {
 
   const navigate = useNavigate();
-
+  const { addToCart } = useCart();
+ 
   return (
     <div className="bg-white h-auto rounded-2xl border-1 border-[#313030] p-2 overflow-hidden relative">
 
@@ -22,7 +23,7 @@ export default function Card ({product}: CardProps) {
           className="w-full bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
           Ver producto
         </button>
-        <button onClick={()=>{handleAddToCart(product)}}
+        <button onClick={()=>{ addToCart( {...product, quantity: 1} ) }}
           className="w-full bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
           Agregar al Carrito
         </button>

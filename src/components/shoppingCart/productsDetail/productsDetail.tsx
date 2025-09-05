@@ -1,46 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./product.module.css"
 import { Minus, Plus, X } from "lucide-react";
 import type { Product } from "../../../types/product";
+import { motion } from "framer-motion";
+import { useCart } from "../../../context/cartContext";
 
 interface ProductsDetailProps {
+  index: number
   product: Product;
-  onRemove: () => void;
-  onUpdate: (quantity:number) => void;
 }
 
-export default function ProductsDetail({product, onRemove, onUpdate}: ProductsDetailProps) {
+export default function ProductsDetail({index, product}: ProductsDetailProps) {
   
   const [quantity, setQuantity] = useState<number>(1);
+  const {cart, updateProductQuantity, removeFromCart} = useCart()
+
+  useEffect(() => {
+    const cartItem = cart.find(item => item.id === product.id);
+    if (cartItem) {
+      setQuantity(cartItem.quantity || 1);
+    }
+  }, [cart, product.id]);
 
   const handleQuantityAdd = () => {
     if (quantity >= product.stock) return;
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
-    onUpdate(newQuantity)
+    updateProductQuantity(index, newQuantity)
   }
 
   const handleQuantitySubtract = () => {
     if (quantity > 1) {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
-      onUpdate(newQuantity)
+      updateProductQuantity(index, newQuantity)
     }
   }
 
   return (
-    <div className="w-full flex justify-between items-center my-2 mx-auto rounded-lg">
-      <div className="w-1/2 flex justify-around items-center "> 
-        <div className="w-1/3">
-          <img
-            src={product.image}
-            alt="Product"
-            className="w-16 h-16 mx-auto object-cover rounded-lg border-1 border-gray-300"
-          />
-        </div>
-        <div className="w-2/3 ">
-          <p className="text-lg font-semibold truncate">{product.name}</p>
-          <p className="text-gray-600">$ {product.price}</p>
+    
+    <motion.div className="w-full flex justify-between items-center my-2 mx-auto border-b-1 pb-1"
+      key={product.id}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          transition={{ delay: index * 0.1 }}
+    >
+      <div className="w-1/2 flex justify-around items-center ">
+        <img
+          src={product.image}
+          alt="Product"
+          className="w-16 h-16 object-cover rounded-lg"
+        />
+        <div className="flex-1">
+          <h4 className="font-medium text-gray-900">{product.name}</h4>
+          <p className="text-cyan-600 font-semibold">${product.price}</p>
         </div>
       </div>
 
@@ -67,11 +81,12 @@ export default function ProductsDetail({product, onRemove, onUpdate}: ProductsDe
 
         </div>
           
-        <button onClick={()=>{onRemove()}}
-          className="p-3 bg-red-500 text-white text-center rounded-lg border-1 border-[black] hover:bg-red-600 hover:cursor-pointer ">
-          <X />
+        <button onClick={()=>{removeFromCart(product.id)}}
+          className="text-red-500 hover:text-red-700 hover:bg-red-50 hover:cursor-pointer">
+          <X className="h-4 w-4" />
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }
+

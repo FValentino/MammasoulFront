@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import { Menu as MenuIcon, X, ShoppingCart } from "lucide-react"
 import { useState } from "react"; 
-export default function Menu() {
+import { useCart } from "../../context/cartContext";
+
+export default function Menu( ) {
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { setCartOpen } = useCart()
+
   return (
     <div className={`${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full container mx-auto md:px-4'}`}>
       <div className={`${isMenuOpen ? 'w-full h-auto bg-[#F4EBDB]' : ''}`}>
@@ -41,9 +46,10 @@ export default function Menu() {
               <Link to="/categorias" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Categorías
               </Link>
-              <Link to="/carrito" className={`font-medium  ${isMenuOpen ? 'text-xl' : ''}`}>
+              <button onClick={()=>{setCartOpen(true)}} 
+                className={`font-medium hover:cursor-pointer  ${isMenuOpen ? 'text-xl' : ''}`}>
                 <ShoppingCart />
-              </Link>
+              </button>
             </div>
           </div>
         </div>

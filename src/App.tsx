@@ -8,31 +8,32 @@ import Footer from "./components/footer/footer"
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import ProductDetail from "./pages/products/productDetail"
 import PaymentNotification from "./pages/shoppingCart/paymentNotification"
+import { CartProvider } from "./context/cartContext"
 
-//Imagen de prueba
 
 function App() {
 
-
   return (
-  
-    <Router>
-      <Menu />
+    <CartProvider>
+      <Router>
+        <Menu />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/inicio" element={<Home />} />
-        <Route path="/categorias" element={<Categories/>} />
-        <Route path="/categoria/:id" element={<Products/>} />
-        <Route path="/productos" element={<Products/>} />
-        <Route path="/productos/:id" element={<ProductDetail/>} />
-        <Route path="/carrito" element={<ShoppingCart />}/>
-        <Route path="/compra/aprobada" element={<PaymentNotification approved={true}/>} />
-        <Route path="/compra/rechazada" element={<PaymentNotification approved={false}/>} />
-      </Routes>
-      
-      <Footer />
-    </Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/inicio" element={<Home />} />
+          <Route path="/categorias" element={<Categories/>} />
+          <Route path="/categoria/:id" element={<Products/>} />
+          <Route path="/productos" element={<Products/>} />
+          <Route path="/productos/:id" element={<ProductDetail/>} />
+          <Route path="/compra/aprobada" element={<PaymentNotification approved={true}/>} />
+          <Route path="/compra/rechazada" element={<PaymentNotification approved={false}/>} />
+        </Routes>
+
+        <ShoppingCart />
+        
+        <Footer />
+      </Router>
+    </CartProvider>
   )
 }
 

@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react';
 import type { Product } from '../../types/product';
 import BackButton from '../../components/ui/backButton';
 import { getProductById } from '../../services/productService';
-import { handleAddToCart } from '../../services/shoppingCartService';
+import { useCart } from '../../context/cartContext';
 
 export default function ProductDetail(){
   const params = useParams();
   const [product, setProduct] = useState<Product|null>(null);
+  const { addToCart } = useCart();
 
   const productId = Number(params.id)
 
@@ -38,7 +39,7 @@ export default function ProductDetail(){
                 <p className='text-xl'> disponibles: {product.stock} </p>
               </div>
               <div className='w-full mt-4 flex justify-center items-center '>
-                <button onClick={()=>{handleAddToCart(product)}}
+                <button onClick={()=>{ addToCart( {...product, quantity: 1} ) }}
                 className="w-2/3 mx-auto bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
                   Agregar al Carrito
                 </button>

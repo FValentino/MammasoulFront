@@ -1,66 +1,100 @@
-import { useEffect, useState } from "react";
-import CartDetail from "../../components/shoppingCart/cartDetail/cartDetail";
+//import CartDetail from "../../components/shoppingCart/cartDetail/cartDetail";
+import { AnimatePresence, motion } from "framer-motion";
+import { X, ShoppingCart as ShoppingCartIcon } from "lucide-react";
 import ProductsDetail from "../../components/shoppingCart/productsDetail/productsDetail";
-import type { ProductCart } from "../../types/product";
+import { useCart } from "../../context/cartContext";
+import { useEffect, useState } from "react";
 
+export default function ShoppingCart( ) {
 
-export default function ShoppingCart() {
-  const [products, setProducts] = useState<ProductCart[]>( ()=>{
-    const actualCart = localStorage.getItem("shoppingCart");
-    return actualCart ? JSON.parse(actualCart) as ProductCart[] : [];
+  const {cart, cartOpen, setCartOpen} = useCart();
+
+  const [cartTotal, setCartTotal] = useState<number>(()=>{
+    const total = cart.reduce( (totalAcumulado, producto)=> totalAcumulado + producto.price * producto.quantity,0 );
+    return cart ? total : 0;
   });
 
   useEffect(()=>{
-    localStorage.setItem("shoppingCart", JSON.stringify(products))
-  },[products])
-
-  const handleRemoveProduct = (pos: number) => {
-    const newProducts = [...products]
-    newProducts.splice(pos,1)
-    setProducts(newProducts);
-  };
-
-  const handleUpdate = (pos:number, newQuantity:number)=>{
-    const productsAux = [...products];
-    productsAux[pos].quantity =  newQuantity
-    setProducts(productsAux)
-  }
+    const total = cart.reduce( (totalAcumulado, producto)=> totalAcumulado + producto.price * (producto.quantity || 1) ,0 );
+    setCartTotal(total)
+  },[cart]);
 
   return (
-    <section className="container mx-auto">
-      <div className="h-10 font-bold my-2">
-        <h2 className="text-2xl">Carrito de compras</h2> 
-      </div>
-      
-      {products.length === 0 
-        ? 
-          <p> No hay productos en el carrito. </p>  
-        : 
-          <div className="w-full min-h-[calc(100vh/2)] flex flex-col justify-center items-center border rounded-lg p-2 
-                          md:flex-row md:justify-between md:items-start ">
-            <div className="w-full me-0 flex flex-col justify-center items-center border-1 rounded-lg
-                            md:w-2/3 md: me-1">
-              {products.map((product, index) => (
-                <ProductsDetail 
-                  key={product.id}
-                  product={product}
-                  onRemove={()=>handleRemoveProduct(index)}
-                  onUpdate={(newQuantity:number)=>handleUpdate(index, newQuantity)}
-                />
-              ))}
-            </div>
-            <div className="w-full ms-0 mt-3 flex flex-col justify-around items-center border-1 rounded-lg
-                            md:w-1/3 md:ms-1 md:mt-0">
-              <div className="w-full h-12 flex justify-center items-center ">
-                <h3 className="text-xl font-medium">Resumen de la compra</h3>
+    <AnimatePresence>
+      {cartOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3 }}
+            className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl"
+          >
+            <div className="flex flex-col h-full">
+              {/* Cart Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-gray-50">
+                <h3 className="text-lg font-semibold text-gray-900">Carrito de Compras</h3>
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <button
+                    onClick={() => setCartOpen(false)}
+                    className="hover:bg-gray-200"
+                  >
+                    <X className="h-4 w-4 text-gray-600" />
+                  </button>
+                </motion.div>
               </div>
-              <CartDetail 
-                productsPrice={products.reduce((acc, product) => acc + product.price * product.quantity, 0)} 
-                total={products.reduce((acc, product) => acc + product.price * product.quantity, 0)}   
-              />
+
+              {/* Cart Items */}
+              <div className="flex-1 overflow-y-auto p-6">
+                {cart.length === 0 ? (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-center py-12"
+                  >
+                    <ShoppingCartIcon className="h-12 w-12 mx-auto text-gray-400 mb-4" />
+                    <p className="text-gray-500">Tu carrito está vacío</p>
+                  </motion.div>
+                ) : (
+                  <div className="space-y-4 overflow-y-scroll">
+                    <AnimatePresence>
+                      {cart.map((product, index) => (
+                        <ProductsDetail
+                          key={product.id} 
+                          index={index}
+                          product={product}
+                        />
+                      ))}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </div>
+
+              {/* Cart Footer */}
+              <AnimatePresence>
+                {cart.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="border-t border-gray-200 p-6 space-y-4 bg-gray-50"
+                  >
+                    <div className="flex justify-between text-lg font-semibold">
+                      <span className="text-gray-900">Total:</span>
+                      <span className="text-cyan-600">${cartTotal}</span>
+                    </div>
+                    <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                      <button className="w-full bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold py-3 rounded-lg shadow-lg">
+                        Proceder al Pago
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
-      }
-    </section> 
+          </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
   );
 }
