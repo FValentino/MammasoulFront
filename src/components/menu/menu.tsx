@@ -7,7 +7,11 @@ export default function Menu( ) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { setCartOpen } = useCart()
-
+  
+  const closeMenu = ()=>{
+    setIsMenuOpen(false)
+  }
+  
   return (
     <div className={`${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full container mx-auto md:px-4'}`}>
       <div className={`${isMenuOpen ? 'w-full h-auto bg-[#F4EBDB]' : ''}`}>
@@ -17,10 +21,10 @@ export default function Menu( ) {
                                         : 'w-full flex justify-between items-center h-16 md:w-2/3'}`}>
             <nav className={`${isMenuOpen ? 'flex flex-col space-y-4 mt-6 mx-4' 
                                           : 'hidden md:flex md:w-1/2 md:justify-around '}`}>
-              <Link to="/" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+              <Link to="/" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Inicio
               </Link>
-              <Link to="/contacto" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+              <Link to="/contacto" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Contacto
               </Link>
             </nav>
@@ -40,10 +44,13 @@ export default function Menu( ) {
           <div className={`${isMenuOpen ? 'w-full md:hidden py-4' 
                                         : 'hidden md:flex md:w-1/3 md:h-16 md:justify-center md:items-center'}`}>
             <div className={`${isMenuOpen ? 'mx-4 flex flex-col space-y-4' : 'md:w-[90%] flex justify-around'}`}>
-              <Link to="/productos" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
+              <Link to="/productos" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Productos
               </Link>
-              <button onClick={()=>{setCartOpen(true)}} 
+              <button onClick={()=>{
+                  closeMenu()
+                  setCartOpen(true)}
+                } 
                 className={`font-medium hover:cursor-pointer  ${isMenuOpen ? 'text-xl' : ''}`}>
                 <ShoppingCart />
               </button>
