@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import type { ProductCart } from "../types/product"
 import type { NotificationType } from "../types/notification";
-import Notification from "../components/ui/notificaction";
+import Notification from "../components/ui/notification";
 
 
 // 1. se define la forma de los datos del contexto
