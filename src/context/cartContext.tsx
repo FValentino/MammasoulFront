@@ -2,6 +2,9 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
 import type { ProductCart } from "../types/product"
+import type { NotificationType } from "../types/notification";
+import Notification from "../components/ui/notificaction";
+
 
 // 1. se define la forma de los datos del contexto
 interface CartContextType{
@@ -28,6 +31,7 @@ export function CartProvider({children}:ChildrenProps){
     const cartLocalStorage = localStorage.getItem("shoppingCart");
     return cartLocalStorage ? JSON.parse(cartLocalStorage) : []
   })
+  const [notification, setNotification] = useState<NotificationType | null>(null);
   
 
   useEffect(()=>{
@@ -37,15 +41,28 @@ export function CartProvider({children}:ChildrenProps){
 
   const addToCart = (product : ProductCart) =>{
     if (cart.find((prod)=>prod.id === product.id)){
-      window.alert("El producto seleccionado ya se encuentra en el carrito.\n \nPuede modificar la cantidad ingresando a el")
+      setNotification({
+        showNotification: true,
+        bodyText: "El producto ya se encuentra en el carrito",
+        color: false
+      })
     }else{
       setCart((prev) => [...prev, product])
-    window.alert("Producto agregado al carrito")
-  }
+      setNotification({
+        showNotification: true,
+        bodyText: "El producto se agrego al carrito",
+        color: true
+      })
+    }
   }
 
   const removeFromCart = (id : number)=>{
     setCart((prev) => prev.filter((product : ProductCart) => product.id !== id))
+    setNotification({
+      showNotification: true,
+      bodyText: "Producto removido",
+      color: false
+    })
   }
 
   const updateProductQuantity = (index : number, newQuantity : number) => {
@@ -61,6 +78,7 @@ export function CartProvider({children}:ChildrenProps){
     <CartContext.Provider value ={{
       cart, addToCart, removeFromCart, updateProductQuantity, clearCart, cartOpen, setCartOpen}}>
       {children}
+      <Notification notification={notification} setNotification={setNotification}/>
     </CartContext.Provider>
   );
 }

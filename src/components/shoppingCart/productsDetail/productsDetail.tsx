@@ -59,32 +59,41 @@ export default function ProductsDetail({index, product}: ProductsDetailProps) {
       </div>
 
       <div className="flex justify-around items-center w-1/2 ">
-        <div className="flex border justify-center items-center space-x-1 rounded-lg">
+        <div className="flex flex-col justify-center items-center space-y-1 ">
+          <div className="flex justify-center items-center space-x-2 rounded-lg">
 
-          <button onClick={handleQuantitySubtract}
-            className="px-2 text-xl text-center rounded hover:cursor-pointer ">
-            <Minus className="w-4 h-4"/>
-          </button>
-          <input
-            type="number"
-            id="quantity"
-            name="quantity"
-            min="1"
-            value={quantity}
-            disabled
-            className={`${styles.inputNumber} border-x-2 w-10 h-auto  rounded text-center`}
-          />
-          <button onClick={handleQuantityAdd}
-            className="px-2 text-xl flex rounded hover:cursor-pointer">
-            <Plus className="w-4 h-4"/>
-          </button>
+            <div className="flex border justify-center items-center space-x-1 rounded-lg">
+              <button onClick={handleQuantitySubtract}
+                className="px-2 text-xl text-center rounded hover:cursor-pointer "
+              >
+                <Minus className="w-4 h-4"/>
+              </button>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                min="1"
+                value={quantity}
+                disabled
+                className={`${styles.inputNumber} border-x-2 w-10 h-auto  rounded text-center`}
+              />
+              <button onClick={handleQuantityAdd}
+                className="px-2 text-xl flex rounded hover:cursor-pointer">
+                <Plus className="w-4 h-4"/>
+              </button>
+            </div>
+            
+
+            
+          
+            <button onClick={()=>{removeFromCart(product.id)}}
+              className="text-red-500 hover:text-red-700 hover:bg-red-50 hover:cursor-pointer">
+              <X className="h-4 w-4" />
+            </button>
+          </div>
+          <p className="text-sm font-medium"> stock disp: {product.stock}</p>
 
         </div>
-          
-        <button onClick={()=>{removeFromCart(product.id)}}
-          className="text-red-500 hover:text-red-700 hover:bg-red-50 hover:cursor-pointer">
-          <X className="h-4 w-4" />
-        </button>
       </div>
     </motion.div>
   );
