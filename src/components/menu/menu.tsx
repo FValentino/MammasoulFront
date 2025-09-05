@@ -43,9 +43,6 @@ export default function Menu( ) {
               <Link to="/productos" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Productos
               </Link>
-              <Link to="/categorias" className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
-                Categorías
-              </Link>
               <button onClick={()=>{setCartOpen(true)}} 
                 className={`font-medium hover:cursor-pointer  ${isMenuOpen ? 'text-xl' : ''}`}>
                 <ShoppingCart />
