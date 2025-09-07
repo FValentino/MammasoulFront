@@ -1,41 +1,41 @@
-import type { Dispatch, SetStateAction } from "react";
+import { type Dispatch, type SetStateAction } from "react";
 import type { Category } from "../../../types/category";
-import { ChevronDown } from "lucide-react";
 import { getAllcategories } from "../../../services/categoryService";
 
 interface Props{
-  setCategory : Dispatch<SetStateAction<Category | null>>
+  selectedCategories : Category[];
+  setCategories : Dispatch<SetStateAction<Category[]>>;
 }
 
-export default function CategorySelector ({setCategory}: Props) {
-
-  const categories = getAllcategories();
+export default function CategorySelector ({selectedCategories, setCategories}: Props) {
+  const allCategories = getAllcategories();
 
   return (
-    <div className="w-2/3 flex flex-col justify-center items-center md:flex-row ">
-      <span className="text-lg font-bold">Buscar una categoria: </span>
+    <div className="w-1/3 flex flex-row justify-center items-center md:flex-col">
+      <h3 className="text-xl font-bold  mx-auto">Categorias </h3>
       
-      <div className="w-full ms-0 flex items-center border rounded-full cursor-pointer relative md:w-[50%] md:ms-2">
-        <select name="categories" 
-          className="w-full relative cursor-pointer text-center appearance-none focus:rounded-full"
-          onChange={(e) => {
-            const selectedId = Number(e.target.value);
-            if (selectedId === 0) {
-              setCategory(null); 
-            } else {
-              const selectedCategory = categories.find(cat => cat.id === Number(selectedId));
-              setCategory(selectedCategory || null);
-            }
-          }}
-        >
-          <option selected value="0" className="text-sm md:text-lg">Todos los productos</option>
+      <div className="w-auto ms-0 mx-auto flex justify-center items-center cursor-pointer relative my-4">
+        <fieldset className="mx-auto">
           {
-            categories.map( (category)=> <option value={category.id} className="text-sm md:text-lg">{category.name}</option> )
+            allCategories.map( (category) => ( 
+              <label key={category.id} className="flex items-center gap-2 text-lg my-1 hover:cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.some((cat) => cat.id === category.id)}
+                  onChange={() =>
+                    setCategories(
+                      selectedCategories.some((cat) => cat.id === category.id)
+                        ? selectedCategories.filter((cat) => cat.id !== category.id)
+                        : [...selectedCategories, category]
+                    )
+                  }
+                  className="accent-white"
+                />
+                {category.name}
+              </label>
+            ))
           }
-        </select>  
-        <span className="absolute right-2 pointer-events-none text-gray-600 text-xl"> 
-          <ChevronDown /> 
-        </span>
+        </fieldset>
       </div>
     </div>
   );

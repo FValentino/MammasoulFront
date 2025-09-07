@@ -1,33 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { useCart } from "../../context/cartContext";
+import Card from "../ui/card";
+import type { Data } from "../../types/generic";
+
+interface ButtonProps<T> {
+  label: string;
+  onClick: (...args: Data<T>[]) => void; 
+};
 
 interface CardProps {
   product: Product;
 }
 
-export default function Card ({product}: CardProps) {
+export default function ProductCard ({product}: CardProps) {
 
   const navigate = useNavigate();
   const { addToCart } = useCart();
  
+  const buttons: ButtonProps<Product>[] = [
+    {label: "Ver Producto", onClick: ()=>{navigate(`/productos/${product.id}`)}},
+    {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1} )}},
+  ] 
+  
+
   return (
-    <div className="bg-white h-auto rounded-2xl border-1 border-[#313030] p-2 overflow-hidden relative">
-
-      <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
-
-      <div className="p-2 flex flex-col gap-2">
-        <h3 className="text-md  font-medium h-12 flex items-center justify-center text-center md:text-sm">{product.name}</h3>
-        <p className="text-md  text-[#313030] font-semibold text-center my-2 md:text-sm">$ {product.price}</p>
-        <button onClick={()=>{navigate(`/productos/${product.id}`)}}
-          className="w-full bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
-          Ver producto
-        </button>
-        <button onClick={()=>{ addToCart( {...product, quantity: 1} ) }}
-          className="w-full bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors">
-          Agregar al Carrito
-        </button>
-      </div>
-    </div>
+    <Card key={product.id} image={product.image} title={product.name} description={`$ ${String(product.price)}`} buttons={buttons}/>
   );
 };

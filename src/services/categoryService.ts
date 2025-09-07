@@ -39,11 +39,11 @@ export function getAllcategories():Category[]{
 }
 
 //find Category by id
-export function getCategoryById(id:number):Category|string{
+export function getCategoryById(id:number):Category|null{
   const category = categoriesData.find((cat)=>cat.id === id)
   if (category){
     return (category);
   }else{
-    return "Categoryo no encontrado"
+    return null;
   }
 }
