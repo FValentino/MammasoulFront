@@ -1,4 +1,6 @@
-import type { Category } from "../types/category";
+import type { Category } from "../types";
+import axios from "axios";
+import { api } from "../client"
 
 const categoriesData =[
   {
@@ -34,8 +36,29 @@ const categoriesData =[
 ]
 
 //get all categories
-export function getAllcategories():Category[]{
-  return(categoriesData)
+
+export async function getAllcategories(): Promise<Category[]> {
+  try{
+    const result = await api.get<Category[]>("/categories")
+
+    if(!result){
+      throw new Error('Categories not found')
+    }
+
+    console.log("RESULT, SERVICE: ", result)
+    
+    return result.data ;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.code === "ECONNABORTED") {
+        console.error("La petición tardó demasiado (timeout).");
+      } else {
+        console.error("Error de Axios:", error.message);
+      }
+    }
+
+    throw error;
+  }
 }
 
 //find Category by id

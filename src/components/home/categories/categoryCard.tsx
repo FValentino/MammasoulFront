@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import type { Data, Category } from "../../../types";
 import Card from "../../ui/card";
-import type { Data } from "../../../types/generic";
-import type { Category } from "../../../types/category";
 
 interface ButtonProps<T> {
   label: string;

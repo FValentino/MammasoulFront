@@ -12,6 +12,12 @@ export default defineConfig({
     watch: {
       usePolling: true
     },
-    allowedHosts: ["https://seven-ads-shave.loca.lt"]
+    allowedHosts: ["https://seven-ads-shave.loca.lt"],
+    proxy: {
+      "/api": {
+        target: "http://localhost:8080", 
+        changeOrigin: true,
+      },
+    },
   },
 })
