@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import type { Product } from '../../types/product';
-import BackButton from '../../components/ui/backButton';
+import {BackButton} from '../../components/common/ui';
 import { getProductById } from '../../services/productService';
 import { useCart } from '../../context/cartContext';
 

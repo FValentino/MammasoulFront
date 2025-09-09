@@ -12,6 +12,7 @@ import ProductDetail from "./pages/products/productDetail"
 import PaymentNotification from "./pages/payment/paymentNotification"
 import Contact from "./pages/contact/contact"
 import Payment from "./pages/payment/payment"
+import ScrollToTop from "./components/common/globalBehavior/scrollToTop";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
     <CartProvider>
       <QueryClientProvider client={queryClient}>  
         <Router>
+          <ScrollToTop/>
           <Menu />
 
           <Routes>

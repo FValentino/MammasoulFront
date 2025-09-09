@@ -7,45 +7,71 @@ const categoriesData =[
     id: 1,
     name: "Bolsos",
     image: "/elegant-recycled-leather-tote.png",
+    active: true
   },
   {
     id: 2,
     name: "Carteras",
     image: "/placeholder-ervoi.png",
+    active: true
   },
   {
     id: 3,
     name: "Mochilas",
     image: "/urban-eco-friendly-green-backpack.png",
+    active: true
   },
   {
     id: 4,
     name: "Bandoleras",
     image: "/artisanal-recycled-leather-bag.png",
+    active: true
   },
   {
     id: 5,
     name: "Clutches",
     image: "/placeholder-jhf58.png",
+    active: true
   },
   {
     id: 6,
     name: "Accesorios",
     image: "/modern-sustainable-fanny-pack.png",
+    active: true
   },
 ]
 
-//get all categories
-
-export async function getAllcategories(): Promise<Category[]> {
+// get all categories
+export async function getAllCategories(): Promise<Category[]> {
   try{
     const result = await api.get<Category[]>("/categories")
 
     if(!result){
       throw new Error('Categories not found')
     }
+    
+    return result.data ;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      if (error.code === "ECONNABORTED") {
+        console.error("La petición tardó demasiado (timeout).");
+      } else {
+        console.error("Error de Axios:", error.message);
+      }
+    }
 
-    console.log("RESULT, SERVICE: ", result)
+    throw error;
+  }
+}
+
+// get all active categories
+export async function getAllActiveCategories(): Promise<Category[]> {
+  try{
+    const result = await api.get<Category[]>("/categories")
+
+    if(!result){
+      throw new Error('Categories not found')
+    }
     
     return result.data ;
   } catch (error) {

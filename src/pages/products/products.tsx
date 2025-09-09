@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import type {Product } from "../../types/product";
 import type { Category } from "../../types/category";
 import Card from "../../components/products/productCard"
-import BackButton from "../../components/ui/backButton";
+import {BackButton} from "../../components/common/ui";
 import CategorySelector from "../../components/filters/categories/categorySelector";
 import {getAllProducts, findProductsByCategory} from "../../services/productService"
 import { getCategoryById } from "../../services/categoryService";

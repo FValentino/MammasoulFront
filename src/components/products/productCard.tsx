@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { useCart } from "../../context/cartContext";
-import Card from "../ui/card";
+import {Card} from "../common/ui";
 import type { Data } from "../../types/generic";
 
 interface ButtonProps<T> {

@@ -98,7 +98,7 @@ export default function Carousel<T>({
               item ? (
                 <motion.div
                   key={index}
-                  className="flex-shrink-0 px-4"
+                  className="flex-shrink-0 px-4 mx-auto"
                   style={{ width: `${100 / itemsPerView}%` }}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}

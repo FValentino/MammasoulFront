@@ -3,7 +3,7 @@
 import { getProductsInSale } from "../../../services/productService"
 import type { Product } from "../../../types/product"
 import ProductCard from "../../products/productCard"
-import Carousel from "../../ui/carousel"
+import {Carousel} from "../../common/ui"
 
 export default function ProductCarousel() {
   
