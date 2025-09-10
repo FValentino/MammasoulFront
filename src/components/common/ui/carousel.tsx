@@ -8,7 +8,6 @@ type Data<T> = T | null;
 
 interface CarouselProps<T> {
   items: Data<T>[];
-  title: string;
   description?: string;
   buttons?: string[];
   renderItem: (item: T, index: number) => ReactNode;
@@ -16,7 +15,6 @@ interface CarouselProps<T> {
 
 export default function Carousel<T>({
   items,
-  title,
   renderItem,
 }: CarouselProps<T>) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -58,17 +56,6 @@ export default function Carousel<T>({
 
   return (
     <div className="container mx-auto px-4">
-      <div className="flex flex-col items-center justify-center mb-8 space-y-2">
-        <motion.h2
-          className="text-3xl font-bold text-foreground text-center"
-          initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          {title}
-        </motion.h2>
-      </div>
 
       <div className="relative">
         {/* Navigation Buttons */}

@@ -1,23 +1,37 @@
 "use client"
 
-import { getProductsInSale } from "../../../services/productService"
 import type { Product } from "../../../types/product"
 import ProductCard from "../../products/productCard"
 import {Carousel} from "../../common/ui"
+import { useFeaturedProducts } from "../../../hooks"
+import { motion } from "framer-motion"
 
 export default function ProductCarousel() {
   
-  const products : Product[] | null = getProductsInSale()
+  const { data: products, isLoading, isError, error } = useFeaturedProducts();
+
+  if (isError) <p>Error al cargar los productos.. {(error as Error).message}</p>
+  if (isLoading) <p>cargando contenido</p>
 
   return (
     <section id="Productos en oferta" className={`${products ? "py-12 visible" : "hidden"}`}>
 
+      <div className="flex flex-col items-center justify-center mb-8 space-y-2">
+        <motion.h2
+          className="text-3xl font-bold text-foreground text-center"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Productos en Oferta
+        </motion.h2>
+      </div>
       {
-        products
+        (products && products?.length>0)
         ?
           <Carousel<Product>
             items={products}
-            title="Nuestros productos en oferta"
             description="Lo mejor de la temporada"
             buttons={["Comprar", "Ver más"]}
             renderItem={(item) => (
@@ -25,7 +39,17 @@ export default function ProductCarousel() {
             )}
           />
         :
-          ""
+          <div className="flex flex-col items-center justify-center mb-8 space-y-2">
+            <motion.p
+              className="text-xl font-bold text-foreground text-center"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              Actualmente no poseemos productos en oferta
+            </motion.p>
+          </div>
       }
     </section>
   )
