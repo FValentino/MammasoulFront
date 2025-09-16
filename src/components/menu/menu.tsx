@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Menu as MenuIcon, X, ShoppingCart } from "lucide-react"
 import { useState } from "react"; 
-import { useCart } from "../../context/cartContext";
+import { useCart } from "../../context/cartContext/cart.context";
 
 export default function Menu( ) {
 

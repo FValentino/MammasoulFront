@@ -3,7 +3,7 @@ import styles from "./product.module.css"
 import { Minus, Plus, X } from "lucide-react";
 import type { Product } from "../../../types/product";
 import { motion } from "framer-motion";
-import { useCart } from "../../../context/cartContext";
+import { useCart } from "../../../context";
 
 interface ProductsDetailProps {
   index: number

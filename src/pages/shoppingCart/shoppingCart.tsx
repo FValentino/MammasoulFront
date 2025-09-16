@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ShoppingCart as ShoppingCartIcon } from "lucide-react";
 import ProductsDetail from "../../components/shoppingCart/productsDetail/productsDetail";
-import { useCart } from "../../context/cartContext";
+import { useCart } from "../../context";
 
 export default function ShoppingCart( ) {
 

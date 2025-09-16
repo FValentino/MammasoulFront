@@ -1,20 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import type { Product } from '../../types/product';
 import {BackButton} from '../../components/common/ui';
-import { getProductById } from '../../services/productService';
-import { useCart } from '../../context/cartContext';
+import { useCart } from '../../context';
+import { useProduct } from '../../hooks';
 
 export default function ProductDetail(){
   const params = useParams();
-  const [product, setProduct] = useState<Product|null>(null);
   const { addToCart } = useCart();
-
   const productId = Number(params.id)
+  const {data: product} = useProduct(productId);
 
-  useEffect(()=>{
-    setProduct(getProductById(productId))
-  },[productId])
+  
 
   return(
     <section className="container mx-auto">

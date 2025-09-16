@@ -14,7 +14,7 @@ export default function ProductCarousel() {
   if (isLoading) <p>cargando contenido</p>
 
   return (
-    <section id="Productos en oferta" className={`${products ? "py-12 visible" : "hidden"}`}>
+    <section id="Productos destacados" className={"py-12"}>
 
       <div className="flex flex-col items-center justify-center mb-8 space-y-2">
         <motion.h2
@@ -24,7 +24,7 @@ export default function ProductCarousel() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Productos en Oferta
+          Productos destacados
         </motion.h2>
       </div>
       {
@@ -47,7 +47,7 @@ export default function ProductCarousel() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              Actualmente no poseemos productos en oferta
+              Actualmente no poseemos productos destacados
             </motion.p>
           </div>
       }

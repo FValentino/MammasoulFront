@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../types/product";
-import { useCart } from "../../context/cartContext";
+import { useCart } from "../../context/";
 import {Card} from "../common/ui";
 import type { Data } from "../../types/generic";
 
@@ -23,8 +23,8 @@ export default function ProductCard ({product}: CardProps) {
     {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1} )}},
   ] 
   
-
+  console.log("PRODUCTO: ", product)
   return (
-    <Card key={product.id} image={product.image} title={product.name} description={`$ ${String(product.price)}`} buttons={buttons}/>
+    <Card key={product.id} image={product.images? product.images[0].url : " "} title={product.name} detail={`$ ${String(product.price)}`} buttons={buttons}/>
   );
 };

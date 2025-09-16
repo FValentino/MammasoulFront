@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllProducts, getProductById, getProductsInSale } from "../services/productService";
+import { getAllProducts, getProductById, getFeaturedProducts } from "../services/productService";
 import type { Product } from "../types";
 
 export function useProducts() {
@@ -21,7 +21,7 @@ export function useProduct(id: number){
 export function useFeaturedProducts(){
   return useQuery<Product[]>({
     queryKey: ["products", "featured"],
-    queryFn: getProductsInSale,
+    queryFn: getFeaturedProducts,
     staleTime: 1000 * 60 * 5
   });
 }

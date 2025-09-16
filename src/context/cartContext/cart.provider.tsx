@@ -1,28 +1,13 @@
-/* eslint-disable react-refresh/only-export-components */
+import { useEffect, useState, type ReactNode } from "react"
+import { CartContext } from "./cart.context";
+import type { ProductCart } from "../../types"
+import type { NotificationType } from "../../types";
+import {Notification} from "../../components/common/ui";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react"
-import type { ProductCart } from "../types/product"
-import type { NotificationType } from "../types/notification";
-import {Notification} from "../components/common/ui";
-
-
-// 1. se define la forma de los datos del contexto
-interface CartContextType{
-  cart: ProductCart[];
-  addToCart: (product: ProductCart) => void;
-  updateProductQuantity: (index: number, newQuantity: number) => void
-  removeFromCart: (id: number) => void;
-  clearCart: () => void;
-  cartOpen: boolean;           
-  setCartOpen: (open: boolean) => void;
-}
 
 interface ChildrenProps{
   children: ReactNode;
 }
-
-// 2. se crea el context
-const CartContext = createContext<CartContextType | null>(null)
 
 //3. provider: envuelve la app y da acceso al carrito
 export function CartProvider({children}:ChildrenProps){
@@ -83,10 +68,3 @@ export function CartProvider({children}:ChildrenProps){
   );
 }
 
-export const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-};

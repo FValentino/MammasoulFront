@@ -1,5 +1,5 @@
 import Button from "./button";
-import type { Data } from "../../types/generic";
+import type { Data } from "../../../types";
 
 
 type ButtonProps<T> = {
@@ -8,29 +8,31 @@ type ButtonProps<T> = {
 };
 
 interface CardProps<T> {
-  image : string;
-  title : string;
-  description? : string;
-  buttons? : ButtonProps<T>[];
+  image: string;
+  title: string;
+  description?: string;
+  detail?: string;
+  buttons?: ButtonProps<T>[];
 }
 
-export default function Card<T>( { image, title, description, buttons }: CardProps<T>) {
+export default function Card<T>( { image, title, detail, buttons }: CardProps<T>) {
   return (
-    <div className="bg-white h-auto rounded-2xl border-1 border-[#313030] p-2 overflow-hidden relative">
+    <div className="w-60 bg-white h-auto rounded-2xl flex flex-col border-[#313030] overflow-hidden relative">
+      <div className="bg-[linear-gradient(135deg,#bdbfc1,#e8eaea)] flex items-center justify-center ">
+        <img src={image} alt={title} className="object-cover" />
+      </div>
 
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
-
-      <div className="p-2 flex flex-col gap-2">
-        <div className="w-full h-12  ">
-          <h3 className="text-md font-bold flex items-center justify-center text-center">{title}</h3>
+      <div className="flex flex-col gap-2">
+        <div className="w-full h-10 flex justify-center items-center overflow-hidden">
+          <h3 className="text-md font-bold text-center truncate">{title}</h3>
         </div>
-        <div className={description? "w-full flex items-center justify-center h-6 visible" : "hidden"}>
-          <p className="text-md  text-[#313030] font-semibold text-center my-2 md:text-sm">{description}</p>
+        <div className={detail? "w-full flex items-center justify-center h-4 visible" : "hidden"}>
+          <p className="text-lg text-[#313030] font-semibold text-center my-2 md:text-lg">{detail}</p>
         </div>
         {
           buttons 
           ? 
-            <div>
+            <div className="w-[80%] mx-auto ">
               {buttons?.map((button : ButtonProps<T>, index)=>(<Button key={index} label={button.label} onClick={button.onClick}/>) )}
             </div>
           :""
