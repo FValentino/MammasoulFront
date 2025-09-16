@@ -1,5 +1,7 @@
 import { CircleCheckBig, CircleX } from "lucide-react";
+
 import { useNavigate } from "react-router-dom";
+import { useHandlePaymentResult } from "../../hooks";
 
 interface NotificationProps{
   approved: boolean
@@ -7,6 +9,8 @@ interface NotificationProps{
 
 export default function PaymentApproved({approved} :NotificationProps){
   const navigate = useNavigate();
+
+  useHandlePaymentResult(approved)
 
   return(
     <section className="w-[90vw] h-auto flex items-center justify-center mx-auto mt-16">

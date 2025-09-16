@@ -21,7 +21,8 @@ export default function ProductDetail(){
         ? 
           <div className='w-[90%] flex flex-col rounded-lg mx-auto md:flex-row md:items-center'>
             <div className="w-full p-2">
-              <img src={product.image} alt={product.name} className='w-[70%] mx-auto border rounded-lg' />
+              <img src={product.images? product.images[0].url : ""} alt={product.name} 
+              className='w-[70%] mx-auto border rounded-lg' />
             </div>
             <div className='w-full mt-3 '>
               <div className='w-[90%] mx-auto'>

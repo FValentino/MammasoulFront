@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import {z} from "zod"
 import { InputForm } from "../common/ui";
-import { useCreateClient } from "../../hooks";
+import { useNavigate } from "react-router-dom";
 
 const schema = z.object({
   name: z.string().min(1, "El nombre es obligatorio"),
@@ -14,6 +14,8 @@ type FormValues = z.infer<typeof schema>
 
 export default function ClientRegisterForm(){
 
+  const navigate = useNavigate();
+
   const {control, handleSubmit, formState:{errors}} = useForm<FormValues>({
     resolver: zodResolver(schema),
     defaultValues:{
@@ -23,17 +25,10 @@ export default function ClientRegisterForm(){
     }
   });
 
-  const { mutate } = useCreateClient()
-
   const onSubmit: SubmitHandler<FormValues> = (data: FormValues) => {
-    mutate(data, {
-    onSuccess: (newClient) => {
-      console.log("Cliente creado:", newClient)
-    },
-    onError: (error) => {
-      console.error("Error creando cliente:", error)
-    }
-  })
+    const client = JSON.stringify(data)
+    localStorage.setItem("client", client)
+    navigate("/compra/confirmar")
   }
 
   return(

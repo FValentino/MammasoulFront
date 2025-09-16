@@ -48,11 +48,11 @@ export default function ProductsDetail({index, product}: ProductsDetailProps) {
     >
       <div className="w-1/2 flex justify-around items-center ">
         <img
-          src={product.image}
+          src={product.images? product.images[0].url : " " }
           alt="Product"
           className="w-16 h-16 object-cover rounded-lg"
         />
-        <div className="flex-1">
+        <div className="flex-1 ms-2">
           <h4 className="font-medium text-gray-900">{product.name}</h4>
           <p className="text-cyan-600 font-semibold">${product.price}</p>
         </div>
@@ -82,9 +82,6 @@ export default function ProductsDetail({index, product}: ProductsDetailProps) {
                 <Plus className="w-4 h-4"/>
               </button>
             </div>
-            
-
-            
           
             <button onClick={()=>{removeFromCart(product.id)}}
               className="text-red-500 hover:text-red-700 hover:bg-red-50 hover:cursor-pointer">

@@ -1,3 +1,5 @@
 export * from "./category/useCategory"
 export * from "./product/useProducts"
 export * from "./client"
+export * from "./purchase/useCreatePurchase"
+export * from "./usePaymentApproved"

@@ -84,7 +84,7 @@ export default function ShoppingCart( ) {
                       <span className="text-cyan-600">${cartTotal}</span>
                     </div>
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <button onClick={()=>{navigate("/compra")}}
+                      <button onClick={()=>{navigate("/compra/cliente")}}
                         className="w-full bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold py-3 rounded-lg shadow-lg hover:cursor-pointer">
                         Proceder al Pago
                       </button>
