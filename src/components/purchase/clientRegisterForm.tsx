@@ -2,10 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm, type SubmitHandler } from "react-hook-form"
 import {z} from "zod"
 import { InputForm } from "../common/ui";
+import { useCreateClient } from "../../hooks";
 
 const schema = z.object({
   name: z.string().min(1, "El nombre es obligatorio"),
-  email: z.string().min(1, "El correo es obligatorio").email("Correo Invalido"),
+  email: z.email({ message: "Correo inválido" }).min(1, "El correo es obligatorio"),
   phone: z.string().min(1, "El telefono es obligatorio").regex(/^\d+$/, "El teléfono solo puede contener números").min(8, "El telefono es muy corto").max(10, "El telefono es muy largo")
 });
 
@@ -22,8 +23,17 @@ export default function ClientRegisterForm(){
     }
   });
 
+  const { mutate } = useCreateClient()
+
   const onSubmit: SubmitHandler<FormValues> = (data: FormValues) => {
-    console.log(data);
+    mutate(data, {
+    onSuccess: (newClient) => {
+      console.log("Cliente creado:", newClient)
+    },
+    onError: (error) => {
+      console.error("Error creando cliente:", error)
+    }
+  })
   }
 
   return(

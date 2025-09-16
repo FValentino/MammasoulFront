@@ -1,5 +1,5 @@
 import { useFilter } from "../../../context";
-import { useCategories } from "../../../hooks/useCategory";
+import { useCategories } from "../../../hooks/category/useCategory";
 
 export default function CategorySelector () {
   const { data: allCategories } = useCategories()

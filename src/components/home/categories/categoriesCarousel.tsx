@@ -1,6 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
-import { useCategories } from "../../../hooks/useCategory"
+import { useCategories } from "../../../hooks/category/useCategory"
 import type { Category } from "../../../types"
 import { Carousel } from "../../common/ui"
 import CategoryCard from "./categoryCard"
