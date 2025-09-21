@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import type { Dispatch, SetStateAction } from "react";
-import type { NotificationType } from "../../types/notification";
+import type { NotificationType } from "../../../types";
 
 interface NotificationProps{
   notification : NotificationType | null;
