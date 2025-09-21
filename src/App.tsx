@@ -17,7 +17,6 @@ import ClientRegister from "./pages/purchase/clientRegister"
 import Purchase from "./pages/purchase/purchase"
 
 function App() {
-  const showCart = location.pathname !== "/compra/confirmar";
 
   return (
     <CartProvider>
@@ -40,7 +39,7 @@ function App() {
             <Route path="/contacto" element={<Contact/>} />
           </Routes>
 
-          {showCart && <ShoppingCart />}
+          <ShoppingCart />
           
           <Footer />
         </Router>

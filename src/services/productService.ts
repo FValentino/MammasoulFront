@@ -2,10 +2,10 @@ import axios from "axios";
 import { api } from "../client";
 import type { Product } from "../types/product";
 
-export async function getAllProducts():Promise<Product[]>{
+export async function getAllActiveProducts():Promise<Product[]>{
 
   try{
-    const result = await api.get<Product[]>("/products/active")
+    const result = await api.get<Product[]>("/products", { params: {is_active: true}})
 
     if (!result) {
       throw new Error ("Products not found")
@@ -27,7 +27,7 @@ export async function getAllProducts():Promise<Product[]>{
 
 export async function getFeaturedProducts():Promise<Product[]>{
   try {
-    const result = await api.get<Product[]>("/products/feature")
+    const result = await api.get<Product[]>("/products", { params: {is_featured: true}})
 
     if (!result){
       throw new Error ("Products not found")
@@ -54,8 +54,7 @@ export async function getProductById(id:number):Promise<Product>{
     if (!result){
       throw new Error ("Product not found")
     }
-
-    return result.data;
+    return result.data; 
   } catch (error){
     if (axios.isAxiosError(error)) {
       if (error.code === "ECONNABORTED") {

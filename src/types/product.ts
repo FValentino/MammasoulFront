@@ -1,4 +1,4 @@
-interface ProductImage {
+export interface ProductImage {
   id: number;
   url: string;
   isRepresentative: boolean;

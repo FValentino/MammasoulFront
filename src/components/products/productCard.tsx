@@ -4,6 +4,7 @@ import { useCart } from "../../context/";
 import {Card} from "../common/ui";
 import type { Data } from "../../types/generic";
 
+
 interface ButtonProps<T> {
   label: string;
   onClick: (...args: Data<T>[]) => void; 
@@ -23,8 +24,7 @@ export default function ProductCard ({product}: CardProps) {
     {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1} )}},
   ] 
   
-  console.log("PRODUCTO: ", product)
   return (
-    <Card key={product.id} image={product.images? product.images[0].url : " "} title={product.name} detail={`$ ${String(product.price)}`} buttons={buttons}/>
+    <Card key={product.id} image={product.images? product.images[0].url : ""} title={product.name} detail={`$ ${String(product.price)}`} buttons={buttons}/>
   );
 };

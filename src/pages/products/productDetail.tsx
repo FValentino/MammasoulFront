@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import {BackButton} from '../../components/common/ui';
 import { useCart } from '../../context';
 import { useProduct } from '../../hooks';
+import ImagesGalery from '../../components/products/imageGalery';
 
 export default function ProductDetail(){
   const params = useParams();
@@ -21,13 +22,18 @@ export default function ProductDetail(){
         ? 
           <div className='w-[90%] flex flex-col rounded-lg mx-auto md:flex-row md:items-center'>
             <div className="w-full p-2">
-              <img src={product.images? product.images[0].url : ""} alt={product.name} 
-              className='w-[70%] mx-auto border rounded-lg' />
+              <ImagesGalery images={product.images? product.images : []}/>
             </div>
             <div className='w-full mt-3 '>
               <div className='w-[90%] mx-auto'>
-                <h2 className='text-2xl text-center'> {product.name} </h2>
-                <p className='text-lg mt-1 text-center'> DESCRIPCION DE PRODUCTO </p>
+                <div className='w-full h-auto flex justify-center items-center md:h-12'>
+                  <h2 className='text-3xl text-center font-bold lowercase first-letter:uppercase'> 
+                    {product.name} 
+                  </h2>
+                </div>
+                <div className='w-full h-auto flex justify-center items-center md:h-24'>
+                  <p className='text-lg mt-1 text-center font-medium'> {product.descriptionDetail} </p>
+                </div>
               </div>
               <div className='h-[0.5px] border-1 my-3'></div>
               <div className='w-full flex justify-around my-2'>

@@ -12,7 +12,7 @@ export default defineConfig({
     watch: {
       usePolling: true
     },
-    allowedHosts: ["https://seven-ads-shave.loca.lt"],
+    allowedHosts: ["fuzzy-socks-retire.loca.lt"],
     proxy: {
       "/api": {
         target: "http://localhost:8080", 

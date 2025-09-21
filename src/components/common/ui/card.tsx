@@ -1,4 +1,5 @@
 import Button from "./button";
+import Image from "./image";
 import type { Data } from "../../../types";
 
 
@@ -19,7 +20,7 @@ export default function Card<T>( { image, title, detail, buttons }: CardProps<T>
   return (
     <div className="w-60 bg-white h-auto rounded-2xl flex flex-col border-[#313030] overflow-hidden relative">
       <div className="bg-[linear-gradient(135deg,#bdbfc1,#e8eaea)] flex items-center justify-center ">
-        <img src={image} alt={title} className="object-cover" />
+        <Image src={image} alt={title} />
       </div>
 
       <div className="flex flex-col gap-2">

@@ -16,12 +16,15 @@ export function CartProvider({children}:ChildrenProps){
     const cartLocalStorage = localStorage.getItem("shoppingCart");
     return cartLocalStorage ? JSON.parse(cartLocalStorage) : []
   })
+  const [total, setTotal] = useState<number>(0);
   const [notification, setNotification] = useState<NotificationType | null>(null);
   
 
   useEffect(()=>{
     const cartString = JSON.stringify(cart)  
     localStorage.setItem("shoppingCart", cartString)
+    const total = cart.reduce((subtotal, product) => subtotal + product.price * (product.quantity ?? 0), 0);
+    setTotal(total)
   },[cart]);
 
   const addToCart = (product : ProductCart) =>{
@@ -61,7 +64,7 @@ export function CartProvider({children}:ChildrenProps){
 
   return (
     <CartContext.Provider value ={{
-      cart, addToCart, removeFromCart, updateProductQuantity, clearCart, cartOpen, setCartOpen}}>
+      cart, addToCart, removeFromCart, updateProductQuantity, clearCart, cartOpen, setCartOpen, total}}>
       {children}
       <Notification notification={notification} setNotification={setNotification}/>
     </CartContext.Provider>

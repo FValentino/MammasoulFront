@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ShoppingCart as ShoppingCartIcon } from "lucide-react";
@@ -7,17 +6,13 @@ import { useCart } from "../../context";
 
 export default function ShoppingCart( ) {
 
-  const {cart, cartOpen, setCartOpen} = useCart();
-  const [cartTotal, setCartTotal] = useState<number>(()=>{
-    const total = cart.reduce( (totalAcumulado, producto)=> totalAcumulado + producto.price * producto.quantity,0 );
-    return cart ? total : 0;
-  });
+  const {cart, cartOpen, setCartOpen, total} = useCart();
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    const total = cart.reduce( (totalAcumulado, producto)=> totalAcumulado + producto.price * (producto.quantity || 1) ,0 );
-    setCartTotal(total)
-  },[cart]);
+  const handlePurchase = ()=>{
+    setCartOpen(false);
+    navigate("/compra/cliente")
+  }
 
   return (
     <AnimatePresence>
@@ -81,10 +76,10 @@ export default function ShoppingCart( ) {
                   >
                     <div className="flex justify-between text-lg font-semibold">
                       <span className="text-gray-900">Total:</span>
-                      <span className="text-cyan-600">${cartTotal}</span>
+                      <span className="text-cyan-600">${total}</span>
                     </div>
                     <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      <button onClick={()=>{navigate("/compra/cliente")}}
+                      <button onClick={handlePurchase}
                         className="w-full bg-amber-400 hover:bg-amber-500 text-gray-900 font-semibold py-3 rounded-lg shadow-lg hover:cursor-pointer">
                         Proceder al Pago
                       </button>

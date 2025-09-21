@@ -1,36 +1,41 @@
 import { BackButton, Button } from "../../components/common/ui";
-import type { ProductCart } from "../../types";
 import ProductDetail from "../../components/purchase/productDetail";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../context";
+import { useCheckout } from "../../hooks";
 
 export default function Purchase(){
 
   const navigate = useNavigate();
+  const {cart, total} = useCart();
 
-  const localShoppingCart = localStorage.getItem("shoppingCart");
-  const products : ProductCart[] = localShoppingCart? JSON.parse(localShoppingCart) : [] 
+  const { checkout, isLoading } = useCheckout();
 
   return(
     <section className="container mx-auto flex flex-col justify-center items-center">
-      <div className="w-full flex justify-start items-center mb-4">
+      <div className="w-[90%] flex justify-start items-center mb-4">
         <BackButton />
         <h2 className="ms-4 text-2xl font-bold"> Confirmar Compra </h2>
       </div>
       { 
-        products.length > 0
+        cart.length > 0
         ? 
           <div className="w-full">
             {
-              products.map((product, index)=>(
-                <ProductDetail product={product} index={index}/>
+              cart.map((product, index)=>(
+                <ProductDetail key={product.id} product={product} index={index}/>
               ))
             }
-            <div className="w-[50%] flex justify-around mx-auto">
-              <div className="w-[30%]"> 
+            <div className="w-full my-4 mx-auto flex justify-around items-center md:w-[50%]">
+              <p className="font-medium text-xl">Total:</p>
+              <p className="font-bold text-xl">$ {total}</p>
+            </div>
+            <div className="w-full md:w-[50%] flex justify-around mx-auto">
+              <div className="w-[45%]"> 
                 <Button label="Volver" onClick={()=>navigate("/")}/>
               </div>
-              <div className="w-[30%]"> 
-                <Button label="Confirmar Compra" onClick={()=>navigate("/compra/aprobada")}/>
+              <div className="w-[45%]"> 
+                <Button label="Confirmar Compra" onClick={()=>checkout()} isDisabled={isLoading}/>
               </div>
             </div>
           </div>

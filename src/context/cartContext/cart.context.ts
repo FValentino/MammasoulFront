@@ -10,6 +10,7 @@ interface CartContextType{
   clearCart: () => void;
   cartOpen: boolean;           
   setCartOpen: (open: boolean) => void;
+  total: number;
 }
 
 
