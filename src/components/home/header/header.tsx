@@ -4,12 +4,12 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import banner1Desktop from "../../../assets/images/banner1Desktop.jpg"
-import banner1Mobile from "../../../assets/images/banner1Mobile.jpg"
-import banner2Desktop from "../../../assets/images/banner2Desktop.jpg"
-import banner2Mobile from "../../../assets/images/banner2Mobile.jpg"
-import banner3Desktop from "../../../assets/images/banner3Desktop.jpg"
-import banner3Mobile from "../../../assets/images/Banner3Mobile.jpg"
+import banner1Desktop from "/images/banner1Desktop.jpg"
+import banner1Mobile from "/images/banner1Mobile.jpg"
+import banner2Desktop from "/images/banner2Desktop.jpg"
+import banner2Mobile from "/images/banner2Mobile.jpg"
+import banner3Desktop from "/images/banner3Desktop.jpg"
+import banner3Mobile from "/images/banner3Mobile.jpg"
 
 interface Banner {
   id: number;
