@@ -32,7 +32,7 @@ export default function ProductDetail(){
                   </h2>
                 </div>
                 <div className='w-full h-auto flex justify-center items-center md:h-24'>
-                  <p className='text-lg mt-1 text-center font-medium'> {product.descriptionDetail} </p>
+                  <p className='text-lg mt-1 text-center font-medium'> {product.description} </p>
                 </div>
               </div>
               <div className='h-[0.5px] border-1 my-3'></div>
