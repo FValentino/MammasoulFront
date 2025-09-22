@@ -7,8 +7,7 @@ export interface ProductImage {
 export interface Product {
   id: number;
   name: string;
-  descriptionCard: string;
-  descriptionDetail: string;
+  description: string;
   price: number;
   stock: number;
   categoryId: number;

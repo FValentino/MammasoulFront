@@ -22,14 +22,12 @@ export default function Carousel<T>({
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      if (window.innerWidth < 768) {
         setItemsPerView(1);
-      } else if (window.innerWidth < 768) {
-        setItemsPerView(2);
       } else if (window.innerWidth < 1024) {
-        setItemsPerView(3);
+        setItemsPerView(2);
       } else {
-        setItemsPerView(4);
+        setItemsPerView(3);
       }
     };
 
@@ -55,7 +53,7 @@ export default function Carousel<T>({
   const maxIndex = Math.max(0, items.length - itemsPerView);
 
   return (
-    <div className="container mx-auto px-4">
+    <div className="w-[90%] mx-auto px-4">
 
       <div className="relative">
         {/* Navigation Buttons */}
@@ -85,7 +83,7 @@ export default function Carousel<T>({
               item ? (
                 <motion.div
                   key={index}
-                  className="flex-shrink-0 px-4 mx-auto"
+                  className="flex-shrink-0 px-4 mx-auto flex justify-center items-center"
                   style={{ width: `${100 / itemsPerView}%` }}
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}

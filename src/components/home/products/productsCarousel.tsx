@@ -1,6 +1,6 @@
 "use client"
 
-import type { Product } from "../../../types/product"
+import type { Product } from "../../../types"
 import ProductCard from "../../products/productCard"
 import {Carousel} from "../../common/ui"
 import { useFeaturedProducts } from "../../../hooks"
@@ -12,6 +12,7 @@ export default function ProductCarousel() {
 
   if (isError) <p>Error al cargar los productos.. {(error as Error).message}</p>
   if (isLoading) <p>cargando contenido</p>
+
 
   return (
     <section id="Productos destacados" className={"py-12"}>
