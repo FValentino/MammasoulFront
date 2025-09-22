@@ -11,7 +11,7 @@ interface PaymentResultState {
   success: boolean;
 }
 
-export function useHandlePaymentResult(approved: boolean) {
+export function useHandlePaymentResult() {
   const { mutate: createPurchaseDetail } = useCreatePurchaseDetail();
   const { mutate: updateVisitor } = useUpdateToClient();
   const { mutate: updatePurchase } = useUpdatePurchase();
@@ -24,8 +24,6 @@ export function useHandlePaymentResult(approved: boolean) {
   });
 
   useEffect(() => {
-    if (!approved) return;
-
     const localPurchase = localStorage.getItem("purchase");
     const localVisitor = localStorage.getItem("visitor");
     const localCart = localStorage.getItem("shoppingCart");
@@ -73,7 +71,7 @@ export function useHandlePaymentResult(approved: boolean) {
       console.error("Error procesando el pago:", err);
       setState({ loading: false, error: String(err), success: false });
     }
-  }, [approved, createPurchaseDetail, updateVisitor, updatePurchase, updateProductStock]);
+  }, [createPurchaseDetail, updateVisitor, updatePurchase, updateProductStock]);
 
   return state;
 }

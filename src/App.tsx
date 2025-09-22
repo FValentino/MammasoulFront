@@ -11,7 +11,8 @@ import Home from './pages/home/home'
 import Products from "./pages/products/products"
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import ProductDetail from "./pages/products/productDetail"
-import PaymentNotification from "./pages/purchase/paymentNotification"
+import PaymentSuccess from "./pages/purchase/paymentFailed"
+import PaymentFailed from "./pages/purchase/paymentFailed"
 import Contact from "./pages/contact/contact"
 import ClientRegister from "./pages/purchase/clientRegister"
 import Purchase from "./pages/purchase/purchase"
@@ -34,8 +35,8 @@ function App() {
             <Route path="/productos/:id" element={<ProductDetail/>} />
             <Route path="/compra/cliente" element={<ClientRegister/>} />
             <Route path="/compra/confirmar" element={<Purchase/>} />
-            <Route path="/compra/aprobada" element={<PaymentNotification approved={true}/>} />
-            <Route path="/compra/rechazada" element={<PaymentNotification approved={false}/>} />
+            <Route path="/compra/aprobada" element={<PaymentSuccess />} />
+            <Route path="/compra/rechazada" element={<PaymentFailed />} />
             <Route path="/contacto" element={<Contact/>} />
           </Routes>
 
