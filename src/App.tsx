@@ -11,7 +11,7 @@ import Home from './pages/home/home'
 import Products from "./pages/products/products"
 import ShoppingCart from "./pages/shoppingCart/shoppingCart"
 import ProductDetail from "./pages/products/productDetail"
-import PaymentSuccess from "./pages/purchase/paymentFailed"
+import PaymentSuccess from "./pages/purchase/paymentSuccess"
 import PaymentFailed from "./pages/purchase/paymentFailed"
 import Contact from "./pages/contact/contact"
 import ClientRegister from "./pages/purchase/clientRegister"
