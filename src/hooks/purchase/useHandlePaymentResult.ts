@@ -3,6 +3,7 @@ import type { Visitor, ProductCart, Purchase, PurchaseDetail } from "../../types
 import { useCreatePurchaseDetail } from ".";
 import { useUpdateToClient } from "../visitor/useUpdateToClient";
 import { useUpdatePurchase } from "./useUpdatePurchase";
+import { useUpdateStock } from "../product/useProducts";
 
 interface PaymentResultState {
   loading: boolean;
@@ -14,6 +15,7 @@ export function useHandlePaymentResult(approved: boolean) {
   const { mutate: createPurchaseDetail } = useCreatePurchaseDetail();
   const { mutate: updateVisitor } = useUpdateToClient();
   const { mutate: updatePurchase } = useUpdatePurchase();
+  const { mutate: updateProductStock } = useUpdateStock();
 
   const [state, setState] = useState<PaymentResultState>({
     loading: false,
@@ -55,6 +57,7 @@ export function useHandlePaymentResult(approved: boolean) {
         createPurchaseDetail(purchaseData, {
           onSuccess: () => {
             completed += 1;
+            updateProductStock({id: purchaseData.productId, quantity: purchaseData.quantity})
             if (completed === cart.length && !hasError) {
               setState({ loading: false, error: null, success: true });
             }
@@ -70,7 +73,7 @@ export function useHandlePaymentResult(approved: boolean) {
       console.error("Error procesando el pago:", err);
       setState({ loading: false, error: String(err), success: false });
     }
-  }, [approved, createPurchaseDetail, updateVisitor, updatePurchase]);
+  }, [approved, createPurchaseDetail, updateVisitor, updatePurchase, updateProductStock]);
 
   return state;
 }
