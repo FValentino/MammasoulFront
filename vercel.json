@@ -1,0 +1,47 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/inicio",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/productos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/productos/:id",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compra/cliente",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compra/confirmar",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compra/aprobada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/compra/rechazada",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contacto",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/home",
+      "destination": "/",
+      "permanent": true
+    }
+  ]
+}
