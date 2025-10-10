@@ -27,7 +27,7 @@ export async function getAllActiveProducts():Promise<Product[]>{
 
 export async function getFeaturedProducts():Promise<Product[]>{
   try {
-    const result = await api.get<Product[]>("/products", { params: {is_featured: true}})
+    const result = await api.get<Product[]>("/products/feature/", { params: {is_featured: true}})
 
     if (!result){
       throw new Error ("Products not found")

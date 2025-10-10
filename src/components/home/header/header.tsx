@@ -73,6 +73,7 @@ export default function BannerSlider() {
               className="w-full object-cover md:object-contain"
             />
           </picture>
+          <h1 className="sr-only"> Mammasoul - Diseño sustentable </h1>
         </motion.div>
       </AnimatePresence>
 

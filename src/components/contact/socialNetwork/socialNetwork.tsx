@@ -21,7 +21,7 @@ export default function SocialNetworks(){
       {
         socialNetworks.map((socialNetwork : SocialInterface)=>{
           return(
-            <div className="w-[50%] mx-auto md:w-[20%] h-[30vh] border border-3 rounded-xl px-4 my-4">
+            <div className="w-[50%] mx-auto md:w-[20%] h-[30vh]  border-3 rounded-xl px-4 my-4">
               <a 
                 href={socialNetwork.info} 
                 className="w-full h-full flex flex-col items-center justify-center space-y-4"

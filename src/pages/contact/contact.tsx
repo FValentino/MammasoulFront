@@ -1,13 +1,22 @@
 import ContactForms from "../../components/contact/contactForm/contactForm";
 import SocialNetworks from "../../components/contact/socialNetwork/socialNetwork";
+import SEO from "../../components/seo/SEO";
 
 
 export default function Contact(){
 
   return (
     <section className="container flex flex-col justify-center items-center mx-auto">
+
+      <SEO title="Contacto" 
+        description="Dejanos tu consultas a traves de nuestras redes o a traves de un correo" 
+        url={import.meta.env.VITE_DOMAIN_BASE_URL+"contacto"} 
+        type="website"
+      />
+
       <div className="w-full mt-4">
-        <h2 className="text-center text-2xl font-bold"> ¿Querés comunicarte con nosotros? </h2>
+        <h1 className="text-center text-2xl font-bold"> Contactanos </h1>
+        <h2 className="text-center text-xl font-bold"> ¿Querés comunicarte con nosotros? </h2>
       </div>
 
       <div className="w-full flex flex-col items-stretch justify-center md:flex-row">

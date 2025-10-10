@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Menu as MenuIcon, X, ShoppingCart } from "lucide-react"
 import { useState } from "react"; 
 import { useCart } from "../../context/cartContext/cart.context";
+import logo from "/logoMenu2-whitoutFondo.png"
 
 export default function Menu( ) {
 
@@ -13,7 +14,7 @@ export default function Menu( ) {
   }
   
   return (
-    <div className={`${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full container mx-auto md:px-4'}`}>
+    <div className={`sticky top-0  z-1000000 bg-[#e9ddca] ${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full  mx-auto md:px-4'}`}>
       <div className={`${isMenuOpen ? 'w-full h-auto bg-[#F4EBDB]' : ''}`}>
         <div className={`${isMenuOpen ? 'w-full md:hidden py-4' : 'w-full md:flex md:justify-between md:items-center'}`}>
           {/* logo y menu */}
@@ -31,8 +32,8 @@ export default function Menu( ) {
 
             <div className={`${isMenuOpen ? 'flex justify-between items-center border-b-2 pb-2' 
                                           : 'w-full flex justify-between items-center md:w-1/2 '}`}>
-              <Link to="/" className=" md:mx-auto">
-                <h1 translate="no" className="text-3xl font-bold text-primary ms-4">Mammasoul</h1>
+              <Link to="/" className=" md:mx-auto ">
+                <img src={logo} alt="logo mammasoul" className="w-[50%] mx-auto" />
               </Link>
               <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X className="w-6 h-6 me-4" /> : <MenuIcon className="w-8 h-8 me-4"/>}
