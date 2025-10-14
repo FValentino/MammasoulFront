@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import type { Product } from "../../types/product";
 
 interface SEOProductDetailProps {
@@ -12,7 +11,7 @@ export default function SEOProductDetail({ product }: SEOProductDetailProps) {
   const imageUrl = product.images?.[0] ? product.images[0].url : "https://mammasoul.com/bannerShare.png";
 
   return (
-    <Helmet>
+    <>
       {/* 🌐 SEO General */}
       <title>{`${product.name} | Mammasoul`}</title>
       <meta
@@ -42,6 +41,6 @@ export default function SEOProductDetail({ product }: SEOProductDetailProps) {
         content={product.description || "Producto sustentable hecho con materiales reciclados por Mammasoul."}
       />
       <meta name="twitter:image" content={imageUrl} />
-    </Helmet>
+    </>
   );
 }

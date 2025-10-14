@@ -1,8 +1,6 @@
-import { Helmet } from "react-helmet-async";
-
 export default function SEOProducts() {
   return (
-    <Helmet>
+    <>
       {/* 🌐 SEO General */}
       <title>Productos sustentables | Mammasoul</title>
       <meta
@@ -34,6 +32,6 @@ export default function SEOProducts() {
         content="Descubrí los productos de diseño sustentable hechos con propósito por Mammasoul."
       />
       <meta name="twitter:image" content="https://mammasoul.com/bannerShare.png" />
-    </Helmet>
+    </>
   );
 }
