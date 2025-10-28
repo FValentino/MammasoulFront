@@ -69,7 +69,7 @@ export default function ProductDetail() {
                             </div>
                             <div className='w-full mt-4 flex justify-center items-center '>
                                 <button
-                                    onClick={() => { addToCart({ ...product, quantity: 1 }) }}
+                                    onClick={() => { addToCart({ ...product, quantity: 1, subtotal: product.price }) }}
                                     className="w-2/3 mx-auto bg-[#525126] text-white font-bold py-2 rounded hover:bg-[#525126]/90 hover:cursor-pointer transition-colors"
                                 >
                                     Agregar al Carrito

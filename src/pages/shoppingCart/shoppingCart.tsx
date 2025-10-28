@@ -17,13 +17,13 @@ export default function ShoppingCart( ) {
   return (
     <AnimatePresence>
       {cartOpen && (
-        <div className="fixed inset-0 z-50 overflow-hidden">
+        <div className="fixed inset-0 z-101 bg-black/50">
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.3 }}
-            className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl"
+            className="absolute right-0 top-0 h-full w-[90%] max-w-md bg-white shadow-2xl"
           >
             <div className="flex flex-col h-full">
               {/* Cart Header */}
@@ -34,7 +34,7 @@ export default function ShoppingCart( ) {
                     onClick={() => setCartOpen(false)}
                     className="hover:bg-gray-200"
                   >
-                    <X className="h-4 w-4 text-gray-600" />
+                    <X className="h-6 w-6 text-gray-600" />
                   </button>
                 </motion.div>
               </div>

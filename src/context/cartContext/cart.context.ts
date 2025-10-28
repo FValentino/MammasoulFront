@@ -11,6 +11,8 @@ interface CartContextType{
   cartOpen: boolean;           
   setCartOpen: (open: boolean) => void;
   total: number;
+  totalQuantity: number;
+  setTotalQuantity: (quantity: number) => void;
 }
 
 

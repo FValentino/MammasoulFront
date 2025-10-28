@@ -7,20 +7,20 @@ import logo from "/logoMenu2-whitoutFondo.png"
 export default function Menu( ) {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { setCartOpen } = useCart()
+  const { setCartOpen, totalQuantity } = useCart()
   
   const closeMenu = ()=>{
     setIsMenuOpen(false)
   }
   
   return (
-    <div className={`sticky top-0  z-1000000 bg-[#e9ddca] ${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full  mx-auto md:px-4'}`}>
+    <div className={`sticky top-0 z-100 bg-[#e9ddca] ${isMenuOpen ? 'w-full h-screen bg-black/80 overflow-hidden' : 'w-full  mx-auto md:px-4'}`}>
       <div className={`${isMenuOpen ? 'w-full h-auto bg-[#F4EBDB]' : ''}`}>
-        <div className={`${isMenuOpen ? 'w-full md:hidden py-4' : 'w-full md:flex md:justify-between md:items-center'}`}>
+        <nav className={`${isMenuOpen ? 'w-full md:hidden' : 'w-full md:flex md:justify-between md:items-center'}`}>
           {/* logo y menu */}
           <div className={`${isMenuOpen ? 'w-full flex flex-col-reverse pb-4 border-b-2 border-dashed' 
                                         : 'w-full flex justify-between items-center h-16 md:w-2/3'}`}>
-            <nav className={`${isMenuOpen ? 'flex flex-col space-y-4 mt-6 mx-4' 
+            <div className={`${isMenuOpen ? 'flex flex-col space-y-4 mt-6 mx-4' 
                                           : 'hidden md:flex md:w-1/2 md:justify-around '}`}>
               <Link to="/" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Inicio
@@ -28,19 +28,35 @@ export default function Menu( ) {
               <Link to="/contacto" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Contacto
               </Link>
-            </nav>
+              
+            </div>
 
             <div className={`${isMenuOpen ? 'flex justify-between items-center border-b-2 pb-2' 
-                                          : 'w-full flex justify-between items-center md:w-1/2 '}`}>
-              <Link to="/" className=" md:mx-auto ">
-                <img src={logo} alt="logo mammasoul" className="w-[50%] mx-auto" />
-              </Link>
+                                          : 'w-full mx-1 flex justify-between items-center md:w-1/2 '}`}>
               <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X className="w-6 h-6 me-4" /> : <MenuIcon className="w-8 h-8 me-4"/>}
               </button>
+              <Link to="/" className=" md:mx-auto ">
+                <img src={logo} alt="logo mammasoul" className="w-[50%] mx-auto" />
+              </Link>
+              <button className="text-xl cursor-pointer md:hidden"
+                onClick={()=>{
+                  closeMenu()
+                  setCartOpen(true)}
+                } 
+              >
+                <div className="w-8 relative h-auto">
+                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 end-0 bg-black rounded-full">
+                  <span className="text-white text-xs w-full rounded-full"> 
+                    {totalQuantity} 
+                  </span>
+                  </div> 
+                </div>
+                <ShoppingCart/>
+              </button>
             </div>
-          </div>
 
+          </div>
           
           <div className={`${isMenuOpen ? 'w-full md:hidden py-4' 
                                         : 'hidden md:flex md:w-1/3 md:h-16 md:justify-center md:items-center'}`}>
@@ -48,16 +64,24 @@ export default function Menu( ) {
               <Link to="/productos" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Productos
               </Link>
-              <button onClick={()=>{
+              <button className="text-xl cursor-pointer"
+                onClick={()=>{
                   closeMenu()
                   setCartOpen(true)}
                 } 
-                className={`font-medium hover:cursor-pointer  ${isMenuOpen ? 'text-xl' : ''}`}>
-                <ShoppingCart />
+              >
+                <div className="w-8 relative h-auto">
+                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 end-0 bg-black rounded-full">
+                  <span className="text-white text-xs w-full rounded-full"> 
+                    {totalQuantity} 
+                  </span>
+                  </div> 
+                </div>
+                <ShoppingCart/>
               </button>
             </div>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   );

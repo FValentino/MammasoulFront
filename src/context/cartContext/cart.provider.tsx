@@ -18,6 +18,7 @@ export function CartProvider({children}:ChildrenProps){
   })
   const [total, setTotal] = useState<number>(0);
   const [notification, setNotification] = useState<NotificationType | null>(null);
+  const [totalQuantity, setTotalQuantity] = useState<number>(0)
   
 
   useEffect(()=>{
@@ -35,28 +36,32 @@ export function CartProvider({children}:ChildrenProps){
         color: false
       })
     }else{
-      setCart((prev) => [...prev, product])
-      setNotification({
-        showNotification: true,
-        bodyText: "El producto se agrego al carrito",
-        color: true
-      })
+      const quantity = totalQuantity + 1;
+      setTotalQuantity(quantity);
+      setCart((prev) => [...prev, product]);
+      setCartOpen(true)
     }
   }
 
   const removeFromCart = (id : number)=>{
-    setCart((prev) => prev.filter((product : ProductCart) => product.id !== id))
-    setNotification({
-      showNotification: true,
-      bodyText: "Producto removido",
-      color: false
-    })
+    const productQuantity: number | undefined = cart.find((product) => product.id == id)?.quantity;
+    if (productQuantity){
+      const quantity = totalQuantity - productQuantity;
+      setTotalQuantity(quantity);
+      setCart((prev) => prev.filter((product : ProductCart) => product.id !== id))
+      setNotification({
+        showNotification: true,
+        bodyText: "Producto removido",
+        color: false
+      })
+    } 
   }
 
   const updateProductQuantity = (index : number, newQuantity : number) => {
     const cartAux = [...cart];
     cartAux[index].quantity = newQuantity;
-
+    const quantity = totalQuantity + 1;
+    setTotalQuantity(quantity);
     setCart(cartAux)
   }
 
@@ -64,7 +69,9 @@ export function CartProvider({children}:ChildrenProps){
 
   return (
     <CartContext.Provider value ={{
-      cart, addToCart, removeFromCart, updateProductQuantity, clearCart, cartOpen, setCartOpen, total}}>
+      cart, addToCart, removeFromCart, updateProductQuantity, clearCart, cartOpen, setCartOpen, total, 
+      totalQuantity, setTotalQuantity  
+    }}>
       {children}
       <Notification notification={notification} setNotification={setNotification}/>
     </CartContext.Provider>
