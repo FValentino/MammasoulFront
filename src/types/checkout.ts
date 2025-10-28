@@ -23,7 +23,7 @@ export interface CheckoutResponse {
 
 export interface PaymentParams{
   clientData: Visitor,
-  cartDetails: ProductCart[],
   total: number,
+  details: ProductCart[],
   description: string
 }

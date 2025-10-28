@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CheckoutResponse, PaymentParams } from "../../types"; 
+import type { CheckoutResponse  } from "../../types"; 
 import { useCreateCheckout } from "./useCreateCheckout";
 import { useCart } from "../../context";
 import { useNavigate } from "react-router-dom";
@@ -22,15 +22,14 @@ export function useCheckout() {
       (partial, product) => partial + " " + product.name,
       ""
     );
+    
 
-    const data: PaymentParams = {
+    createCheckout({
       clientData: client,
-      cartDetails: cart,
       total: total,
+      details: cart,
       description: description
-    }
-
-    createCheckout(data, {
+    }, {
       onSuccess: (newCheckout: CheckoutResponse) => {
         window.open(newCheckout.links.checkout_link, "_blank", "noopener,noreferrer");
         setIsLoading(false);

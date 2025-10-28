@@ -6,7 +6,7 @@ import { api } from "../client"
 export async function createCheckout(data: PaymentParams): Promise<CheckoutResponse> {
 
   try{
-    const result = await api.post(`/uala`, data)
+    const result = await api.post(`/uala/`, data)
 
     if(!result){
       throw new Error('error creating checkaout')
