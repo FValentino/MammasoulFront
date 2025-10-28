@@ -13,7 +13,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/productos/:id",
+      "source": "/productos/:name",
       "destination": "/index.html"
     },
     {
