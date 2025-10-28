@@ -22,6 +22,9 @@ export function CartProvider({children}:ChildrenProps){
   
 
   useEffect(()=>{
+    if (totalQuantity < 0){
+      setTotalQuantity(0)
+    }
     const cartString = JSON.stringify(cart)  
     localStorage.setItem("shoppingCart", cartString)
     const total = cart.reduce((subtotal, product) => subtotal + product.price * (product.quantity ?? 0), 0);
