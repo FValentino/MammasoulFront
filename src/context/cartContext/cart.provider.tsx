@@ -18,7 +18,7 @@ export function CartProvider({children}:ChildrenProps){
   })
   const [total, setTotal] = useState<number>(0);
   const [notification, setNotification] = useState<NotificationType | null>(null);
-  const [totalQuantity, setTotalQuantity] = useState<number>(0)
+  const [totalQuantity, setTotalQuantity] = useState<number>(cart.reduce((quantity, product)=>quantity + product.quantity, 0))
   
 
   useEffect(()=>{
