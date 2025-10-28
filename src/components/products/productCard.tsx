@@ -21,7 +21,7 @@ export default function ProductCard ({product}: CardProps) {
  
   const buttons: ButtonProps<Product>[] = [
     {label: "Ver Producto", onClick: ()=>{navigate(`/productos/${product.id}`)}},
-    {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1} )}},
+    {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1, subtotal: product.price} )}},
   ] 
   
   return (
