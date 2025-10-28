@@ -1,3 +1,5 @@
+
+
 export default function SEOHome() {
   const pageUrl = "https://mammasoul.com/"; // URL base de la página de inicio
   const imageUrl = "https://mammasoul.com/bannerShare.png"; // Imagen principal para compartir
