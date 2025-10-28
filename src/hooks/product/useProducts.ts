@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllActiveProducts, getProductById, getFeaturedProducts } from "../../services/productService";
+import { getAllActiveProducts, getProductById, getFeaturedProducts, getProductByName } from "../../services/productService";
 import type { Product } from "../../types";
 
 
@@ -16,6 +16,14 @@ export function useProduct(id: number){
     queryKey: ["product", id],
     queryFn: ()=>getProductById(id),
     enabled: Boolean(id)
+  });
+}
+
+export function useProductName(name: string){
+  return useQuery<Product>({
+    queryKey: ["product", name],
+    queryFn: ()=>getProductByName(name),
+    enabled: Boolean(name)
   });
 }
 

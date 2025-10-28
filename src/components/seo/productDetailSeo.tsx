@@ -17,7 +17,9 @@ export default function SEOProductDetail({ product, currencyCode = 'ARS' }: SEOP
     ? representativeImage.url 
     : (product.images?.[0]?.url || "https://mammasoul.com/bannerShare.png");
 
-  const pageUrl = `https://mammasoul.com/productos/${product.id}`;
+  //3. definicion de url con nombre
+  const productUrl = product.name.replaceAll(" ", "-")
+  const pageUrl = `https://mammasoul.com/productos/${productUrl}`;
   const availability = product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock";
   const availabilityOg = product.stock > 0 ? "in stock" : "out of stock";
   

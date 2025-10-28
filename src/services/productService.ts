@@ -67,3 +67,24 @@ export async function getProductById(id:number):Promise<Product>{
     throw error;
   }
 }
+
+export async function getProductByName(name: string):Promise<Product>{
+ try {
+    const result = await api.get<Product>(`/products/name/${name}`)
+
+    if (!result){
+      throw new Error ("Product not found")
+    }
+    return result.data; 
+  } catch (error){
+    if (axios.isAxiosError(error)) {
+      if (error.code === "ECONNABORTED") {
+        console.error("La petición tardó demasiado (timeout).");
+      } else {
+        console.error("Error de Axios:", error.message);
+      }
+    }
+
+    throw error;
+  }
+}

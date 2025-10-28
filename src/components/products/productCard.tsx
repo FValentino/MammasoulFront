@@ -18,9 +18,11 @@ export default function ProductCard ({product}: CardProps) {
 
   const navigate = useNavigate();
   const { addToCart } = useCart();
+
+  const productUrl = product.name.replaceAll(" ", "-")
  
   const buttons: ButtonProps<Product>[] = [
-    {label: "Ver Producto", onClick: ()=>{navigate(`/productos/${product.id}`)}},
+    {label: "Ver Producto", onClick: ()=>{navigate(`/productos/${productUrl}`)}},
     {label: "Agregar al carrito", onClick: ()=>{addToCart( {...product, quantity: 1, subtotal: product.price})}},
   ] 
   

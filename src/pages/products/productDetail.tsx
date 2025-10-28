@@ -1,16 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { BackButton } from '../../components/common/ui';
 import { useCart } from '../../context';
-import { useProduct } from '../../hooks';
+import { useProductName } from '../../hooks';
 import ImagesGalery from '../../components/products/imageGalery';
 import SEOProductDetail from '../../components/seo/productDetailSeo';
 
 export default function ProductDetail() {
     const params = useParams();
     const { addToCart } = useCart();
-    const productId = Number(params.id);
+    const productName = params.name? params.name.replaceAll("-", " ") : "";
     
-    const { data: product, isPending } = useProduct(productId); 
+    const { data: product, isPending } = useProductName(productName); 
 
     return (
         <section className="container mx-auto">

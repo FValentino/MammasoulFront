@@ -18,7 +18,7 @@ export default function AppRouter(){
         <Route path="/inicio" element={<Navigate to="/" replace />} />
         <Route path="/productos" element={<Products/>} />
       </Route>
-      <Route path="/productos/:id" element={<ProductDetail/>} />
+      <Route path="/productos/:name" element={<ProductDetail/>} />
       <Route path="/compra/cliente" element={<ClientRegister/>} />
       <Route path="/compra/confirmar" element={<Purchase/>} />
       <Route path="/compra/aprobada" element={<PaymentSuccess />} />
