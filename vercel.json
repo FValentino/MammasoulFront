@@ -1,5 +1,24 @@
 {
   "rewrites": [
+   {
+      "source": "/productos/:name",
+      "has": [
+        {
+          "type": "header",
+          "key": "User-Agent",
+          "value": "(.*facebookexternalhit.*|.*twitterbot.*|.*linkedinbot.*.*pinterestbot.*|.*googlebot.*)"
+        }
+      ],
+      "destination": "https://service.prerender.io/https://mammasoul.com/productos/:name",
+      "headers": [
+        {
+          "key": "X-Prerender-Token",
+          "value": "zq5mzs4ijmuAMIFJz0fr" 
+        }
+      ]
+    },
+    
+
     {
       "source": "/",
       "destination": "/index.html"
@@ -13,7 +32,7 @@
       "destination": "/index.html"
     },
     {
-      "source": "/productos/:id",
+      "source": "/productos/:id", 
       "destination": "/index.html"
     },
     {
@@ -34,6 +53,11 @@
     },
     {
       "source": "/contacto",
+      "destination": "/index.html"
+    },
+
+    {
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
