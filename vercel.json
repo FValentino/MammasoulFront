@@ -1,15 +1,4 @@
 {
-  "headers": [
-    {
-      "source": "https://service.prerender.io/:path*",
-      "headers": [
-        {
-          "key": "X-Prerender-Token",
-          "value": "zq5mzs4ijmuAMIFJz0fr" 
-        }
-      ]
-    }
-  ],
   "rewrites": [
     {
       "source": "/productos/:name",
@@ -20,7 +9,7 @@
           "value": "(.*facebookexternalhit.*|.*twitterbot.*|.*linkedinbot.*.*pinterestbot.*|.*googlebot.*)"
         }
       ],
-      "destination": "https://service.prerender.io/https://mammasoul.com/productos/:name" 
+      "destination": "https://service.prerender.io/https://mammasoul.com/productos/:name?prerenderToken=$PRERENDER_TOKEN"
     },
     
     {
