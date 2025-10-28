@@ -56,6 +56,7 @@ export function CartProvider({children}:ChildrenProps){
   const updateProductQuantity = (index : number, newQuantity : number) => {
     const cartAux = [...cart];
     cartAux[index].quantity = newQuantity;
+    cartAux[index].subtotal = cartAux[index].price * newQuantity;
 
     setCart(cartAux)
   }

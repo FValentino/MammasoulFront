@@ -1,7 +1,13 @@
-export interface Visitor{
-  id?: number;
+export interface VisitorInput{
   name: string;
   email: string;
   phone: string;
-  isBuyer?: true;
+}
+
+export interface Visitor{
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  isBuyer: boolean;
 }

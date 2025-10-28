@@ -19,6 +19,7 @@ export interface Product {
 
 export interface ProductCart extends Product{
   quantity: number;
+  subtotal: number;
 }
 
 export interface CartData {

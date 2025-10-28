@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { CheckoutResponse  } from "../../types"; 
+import type { CheckoutResponse, Visitor  } from "../../types"; 
 import { useCreateCheckout } from "./useCreateCheckout";
 import { useCart } from "../../context";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export function useCheckout() {
   const navigate = useNavigate();
 
   const visitorData = localStorage.getItem("visitor");
-  const client = visitorData ? JSON.parse(visitorData) : null;
+  const client: Visitor = visitorData ? JSON.parse(visitorData) : null;
 
   const checkout = () => {
 
@@ -22,7 +22,6 @@ export function useCheckout() {
       (partial, product) => partial + " " + product.name,
       ""
     );
-    
 
     createCheckout({
       clientData: client,
