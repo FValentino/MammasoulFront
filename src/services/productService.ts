@@ -67,32 +67,3 @@ export async function getProductById(id:number):Promise<Product>{
     throw error;
   }
 }
-
-export async function updateProductStock (id: number, soldQuantity: number)  {
-  try {
-    const response = await fetch(`/products/${id}`, {
-      method: 'PATCH', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({soldQuantity}),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error updating stock: ${response.statusText}`);
-    }
-
-    const result = await response.json();
-    return result;
-  } catch (error){
-    if (axios.isAxiosError(error)) {
-      if (error.code === "ECONNABORTED") {
-        console.error("La petición tardó demasiado (timeout).");
-      } else {
-        console.error("Error de Axios:", error.message);
-      }
-    }
-
-    throw error;
-  }
-};

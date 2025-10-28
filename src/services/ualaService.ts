@@ -1,15 +1,12 @@
-import type { CheckoutPayload, CheckoutResponse } from "../types";
+import type { CheckoutResponse, PaymentParams } from "../types";
 import axios from "axios";
 import { api } from "../client"
 
 
-export async function createCheckout(data: CheckoutPayload): Promise<CheckoutResponse> {
-
-  const localPurchase = localStorage.getItem("visitor");
-  const purchase = localPurchase ? JSON.parse(localPurchase) : null;
+export async function createCheckout(data: PaymentParams): Promise<CheckoutResponse> {
 
   try{
-    const result = await api.post(`/purchases/${purchase.id}/checkout/uala`, data)
+    const result = await api.post(`/uala`, data)
 
     if(!result){
       throw new Error('error creating checkaout')

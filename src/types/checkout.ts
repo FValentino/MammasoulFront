@@ -1,3 +1,6 @@
+import type { ProductCart } from "./product";
+import type { Visitor } from "./visitor";
+
 export interface CheckoutPayload {
   amount: string;              
   description: string;
@@ -16,4 +19,11 @@ export interface CheckoutResponse {
   status: "PENDING" | "APPROVED" | "REJECTED"; 
   external_reference: string;
   links: CheckoutLinks;
+}
+
+export interface PaymentParams{
+  clientData: Visitor,
+  cartDetails: ProductCart[],
+  total: number,
+  description: string
 }

@@ -21,3 +21,8 @@ export interface ProductCart extends Product{
   quantity: number;
 }
 
+export interface CartData {
+  cart: ProductCart[],
+  total: number
+}
+

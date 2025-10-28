@@ -10,7 +10,7 @@ interface Props<T extends FieldValues = FieldValues>{
 export function InputForm <T extends FieldValues = FieldValues>({name, control, label, type, error}: Props<T>){
 
   return(
-    <div className="w-[90%] flex flex-col mt-2">
+    <div className="w-full flex flex-col mt-2">
       <label htmlFor={name} className="font-bold">{label}:</label>
       <Controller
         name={name}

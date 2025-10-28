@@ -1,11 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { getAllActiveProducts, getProductById, getFeaturedProducts, updateProductStock } from "../../services/productService";
+import { useQuery } from "@tanstack/react-query";
+import { getAllActiveProducts, getProductById, getFeaturedProducts } from "../../services/productService";
 import type { Product } from "../../types";
 
-interface updateProductDTO{
-  id: number;
-  quantity: number;
-}
 
 export function useProducts() {
   return useQuery<Product[]>({
@@ -29,10 +25,4 @@ export function useFeaturedProducts(){
     queryFn: getFeaturedProducts,
     staleTime: 1000 * 60 * 5
   });
-}
-
-export function useUpdateStock() {
-  return useMutation<Product, Error, updateProductDTO>({
-    mutationFn: (data: updateProductDTO) => updateProductStock(data.id, data.quantity),
-  })
 }
