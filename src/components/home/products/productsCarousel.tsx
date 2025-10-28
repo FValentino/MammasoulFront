@@ -15,7 +15,7 @@ export default function ProductCarousel() {
 
 
   return (
-    <section id="Productos destacados" className={"py-12"}>
+    <section id="Productos destacados" className="w-full py-12">
 
       <div className="flex flex-col items-center justify-center mb-8 space-y-2">
         <motion.h2
@@ -29,28 +29,36 @@ export default function ProductCarousel() {
         </motion.h2>
       </div>
       {
-        (products && products?.length>0)
+        isLoading
         ?
-          <Carousel<Product>
-            items={products}
-            description="Lo mejor de la temporada"
-            buttons={["Comprar", "Ver más"]}
-            renderItem={(item) => (
-              <ProductCard product={item}/>
-            )}
-          />
-        :
-          <div className="flex flex-col items-center justify-center mb-8 space-y-2">
-            <motion.p
-              className="text-xl font-bold text-foreground text-center"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Actualmente no poseemos productos destacados
-            </motion.p>
+          <div className="w-full h-auto">
+            <div className="w-[50%] mx-auto flex justify-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-gray-500"></div>
+            </div>
           </div>
+        :
+          (products && products?.length>0)
+          ?
+            <Carousel<Product>
+              items={products}
+              description="Lo mejor de la temporada"
+              buttons={["Comprar", "Ver más"]}
+              renderItem={(item) => (
+                <ProductCard product={item}/>
+              )}
+            />
+          :
+            <div className="flex flex-col items-center justify-center mb-8 space-y-2">
+              <motion.p
+                className="text-xl font-bold text-foreground text-center"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+              >
+                Actualmente no poseemos productos destacados
+              </motion.p>
+            </div>
       }
     </section>
   )

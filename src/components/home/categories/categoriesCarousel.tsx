@@ -9,11 +9,10 @@ export default function CategoriesCarousel() {
   
   const {data : categories, isLoading, isError, error} = useCategories();
 
-  if (isLoading) return <p> Cargando contenido... </p>;
   if (isError) return <p> Error al cargar las categorias:{(error as Error).message}</p>;
 
   return (
-    <section id="Categorias" className={`${categories ? "py-12 visible" : "hidden"}`}>
+    <section id="Categorias" className="py-12 ">
       <div className="flex flex-col items-center justify-center mb-8 space-y-2">
         <motion.h2
           className="text-3xl font-bold text-foreground text-center"
@@ -27,18 +26,26 @@ export default function CategoriesCarousel() {
       </div>
 
       {
-        categories
+        isLoading 
         ?
-          <Carousel<Category>
-            items={categories}
-            description="Lo mejor de la temporada"
-            buttons={["Comprar", "Ver más"]}
-            renderItem={(item) => (
-              <CategoryCard category={item}/>
-            )}
-          />
+          <div className="w-full h-auto">
+            <div className="w-[50%] mx-auto flex justify-center">
+              <div className="animate-spin rounded-full h-16 w-16 border-1 border-t-2 border-b-2 border-gray-500"></div>
+            </div>
+          </div>
         :
-          ""
+          categories
+          ?
+            <Carousel<Category>
+              items={categories}
+              description="Lo mejor de la temporada"
+              buttons={["Comprar", "Ver más"]}
+              renderItem={(item) => (
+                <CategoryCard category={item}/>
+              )}
+            />
+          :
+            ""
       }
     </section>
   )
