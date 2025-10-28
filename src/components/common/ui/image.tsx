@@ -13,7 +13,7 @@ export default function Image({ src, alt, styles }: ImageProps) {
   return (
     <>
       {loading && (
-        <div className="absolute">
+        <div className="absolute h-full">
           <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-gray-500"></div>
         </div>
       )}
@@ -23,7 +23,6 @@ export default function Image({ src, alt, styles }: ImageProps) {
           src={src}
           alt={alt}
           className={ styles ? styles : `object-cover w-full h-full ${loading ? "hidden" : "block"}` }
-          //className={`object-cover w-full h-full ${loading ? "hidden" : "block"}`}
           onLoad={() => setLoading(false)}
           onError={() => {
             setLoading(false);
