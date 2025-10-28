@@ -26,7 +26,7 @@ export function CartProvider({children}:ChildrenProps){
     localStorage.setItem("shoppingCart", cartString)
     const total = cart.reduce((subtotal, product) => subtotal + product.price * (product.quantity ?? 0), 0);
     setTotal(total)
-  },[cart]);
+  },[cart, totalQuantity]);
 
   const addToCart = (product : ProductCart) =>{
     if (cart.find((prod)=>prod.id === product.id)){
