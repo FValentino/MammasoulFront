@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+Opcional: Si el servicio de prerendering usa un user-agent específico
+
+User-agent: Prerender
+
+Allow: /
+
+Sitemap: https://www.google.com/search?q=https://mammasoul.com/sitemap.xml
