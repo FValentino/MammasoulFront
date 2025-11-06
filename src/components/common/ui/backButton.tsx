@@ -6,7 +6,7 @@ export default function BackButton () {
   return (
     <div>
       <button 
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/")}
         className="flex items-center border-3 rounded-[50%] text-[#313030] hover:scale-110 hover:cursor-pointer">
         <ArrowLeft className="w-8 h-8"/>
       </button>

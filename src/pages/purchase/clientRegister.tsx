@@ -16,7 +16,7 @@ export default function ClientRegister(){
   return(
     <section className="container mx-auto flex flex-col justify-center items-center">
       <div className="w-full flex justify-start items-center mb-4">
-        <BackButton />
+        <BackButton /> <span className="text-sm"> Volver al inicio </span>
         <h2 className="ms-4 text-2xl font-bold"> Confirmar Compra </h2>
       </div>
       { 
