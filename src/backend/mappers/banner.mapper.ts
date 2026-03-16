@@ -11,7 +11,3 @@ export const mapBannerToDTO = (banner: Banner): BannerDTO => {
     device: banner.device ?? "desktop",
   };
 };
-
-export const mapBannersToDTO = (banners: Banner[]): BannerDTO[] => {
-  return banners.map(mapBannerToDTO);
-};

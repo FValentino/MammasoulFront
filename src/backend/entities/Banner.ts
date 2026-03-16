@@ -8,10 +8,10 @@ export class Banner {
 	@Column({name: "image_url", })
 	imageUrl!: string;
 
-	@Column({ nullable: true })
+	@Column({ name: "link_url", nullable: true })
 	linkUrl!: string; 
 
-	@Column({ default: true })
+	@Column({  name: "is_active", default: true })
 	isActive!: boolean;
 
 	@Column({ default: 0 })

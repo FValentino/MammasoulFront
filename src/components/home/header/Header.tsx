@@ -1,61 +1,69 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
-import banner1Desktop from "@/assets/images/banner1Desktop.jpg"
-import banner1Mobile from "@/assets/images/banner1Mobile.jpg"
-import banner2Desktop from "@/assets/images/banner2Desktop.jpg"
-import banner2Mobile from "@/assets/images/banner2Mobile.jpg"
-import banner3Desktop from "@/assets/images/banner3Desktop.jpg"
-import banner3Mobile from "@/assets/images/banner3Mobile.jpg"
-import Image, { StaticImageData } from "next/image"
+import { BannerDTO } from "@/types/banner.type"
+import Image from "next/image"
 
-interface Banner {
-  id: number;
-  title: string;
-  imageDesktop: StaticImageData;
-  imageMobile: StaticImageData;
+interface Props{
+  allBanners: BannerDTO[];
 }
 
-const banners: Banner[] = [
-  {
-    id: 1,
-    title: "Transformamos bolsas plasticas en marroquineria",
-    imageDesktop: banner1Desktop,
-    imageMobile: banner1Mobile
-  },
-  {
-    id: 2,
-    title: "Hacemos envios a todo el pais",
-    imageDesktop: banner2Desktop,
-    imageMobile: banner2Mobile
-    
-  },
-  {
-    id: 3,
-    title: "Nuestros logros incluyen un reconocimiento en la feria 'Puro diseño' y un reconocimiento en 'DiseñoTeca 2025'",
-    imageDesktop: banner3Desktop,
-    imageMobile: banner3Mobile
-  },
-]
+function getDevice(): string {
+  if (typeof window === "undefined") return "desktop"
+  return window.innerWidth <= 768 ? "mobile" : "desktop"
+}
 
-export default function BannerSlider() {
-  const [current, setCurrent] = useState(0);
+export default function BannerSlider({allBanners}: Props) {
+  const [current, setCurrent] = useState(0)
+  const [device, setDevice] = useState<string>("desktop")
+  const [banners, setBanners] = useState<BannerDTO[]>(allBanners.filter((banner)=>banner.device == device))
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setDevice(getDevice())
+    }
+    
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  useEffect(() => {
+    async function loadBanners() {
+      setLoading(true)
+      const bannerAux = allBanners.filter((banner)=>banner.device == getDevice());
+      setBanners(bannerAux)
+      setLoading(false)
+    }
+    loadBanners()
+  }, [device])
 
   const nextBanner = () => {
-    setCurrent((prev) => (prev + 1) % banners.length);
-  };
+    if (banners.length === 0) return
+    setCurrent((prev) => (prev + 1) % banners.length)
+  }
 
   const prevBanner = () => {
-    setCurrent((prev) => (prev - 1 + banners.length) % banners.length);
-  };
+    if (banners.length === 0) return
+    setCurrent((prev) => (prev - 1 + banners.length) % banners.length)
+  }
+
+  if (loading || banners.length === 0) {
+    return (
+      <section className="relative w-full h-auto md:h-[calc(100vh-10rem)] my-8 overflow-hidden bg-gray-100">
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="animate-pulse text-gray-400">Cargando banners...</div>
+        </div>
+      </section>
+    )
+  }
 
   return (
-    <section
-      className="relative w-full h-auto md:h-[calc(100vh-10rem)] my-8 overflow-hidden "
-    >
+    <section className="relative w-full h-auto md:h-[calc(100vh-10rem)] my-8 overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={banners[current].id}
@@ -63,41 +71,35 @@ export default function BannerSlider() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="w-full relative overflow-hidden h-full flex items-center"
+          className="w-full h-[calc(100vh-10rem)] relative overflow-hidden flex items-center"
         >
-
-          <picture>
-            <source 
-              media="(max-width: 768px)" 
-              srcSet={typeof banners[current].imageMobile === 'string' 
-                ? banners[current].imageMobile 
-                : banners[current].imageMobile.src} 
-              />
-
-            <Image 
-              src={banners[current].imageDesktop}
-              alt={banners[current].title}
-              fill
-              className="w-full object-cover md:object-contain" 
-            />
-          </picture>
-          <h1 className="sr-only"> Mammasoul - Diseño sustentable </h1>
+          <Image
+            src={banners[current].imageUrl}
+            alt={`Banner ${banners[current].id}`}
+            fill
+            className="object-cover md:object-contain"
+            priority
+          />
         </motion.div>
       </AnimatePresence>
 
-      <button
-        onClick={nextBanner}
-        className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 bg-opacity-50 text-white p-2 rounded cursor-pointer"
-      >
-        <ChevronRight/>
-      </button>
+      {banners.length > 1 && (
+        <>
+          <button
+            onClick={nextBanner}
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 bg-opacity-50 text-white p-2 rounded cursor-pointer"
+          >
+            <ChevronRight />
+          </button>
 
-      <button
-        onClick={prevBanner}
-        className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 bg-opacity-50 text-white p-2 rounded"
-      >
-        <ChevronLeft/>
-      </button>
+          <button
+            onClick={prevBanner}
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 bg-opacity-50 text-white p-2 rounded"
+          >
+            <ChevronLeft />
+          </button>
+        </>
+      )}
     </section>
-  );
+  )
 }
