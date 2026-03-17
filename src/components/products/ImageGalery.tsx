@@ -9,7 +9,11 @@ interface ProductGalleryProps {
 }
 
 export default function ProductGallery({ images }: ProductGalleryProps) {
-  const [selected, setSelected] = useState(images[0].url);
+  const [selected, setSelected] = useState(images && images.length > 0 ? images[0].url : "");
+
+  if (!images || images.length === 0) {
+    return <div className="flex items-center justify-center h-80 bg-gray-100">Sin imágenes</div>;
+  }
 
   return (
     <div className="flex flex-col gap-4 md:flex-row">

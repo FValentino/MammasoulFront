@@ -22,12 +22,13 @@ export default function ProductsClient({
 }: Props) {
   const router = useRouter();
 
-  
   const [selectedCategories, setSelectedCategories] = useState<number[]>(() =>
     categories
       .filter(cat => initialSelectedCategorySlugs.includes(cat.slug))
       .map(cat => cat.id)
   );
+
+  const [sortBy, setSortBy] = useState<string>("");
 
   const filteredProducts = useMemo(() => {
     if (selectedCategories.length === 0) return initialProducts;
@@ -36,6 +37,25 @@ export default function ProductsClient({
       selectedCategories.includes(product.category_id)
     );
   }, [selectedCategories, initialProducts]);
+
+  const sortedProducts = useMemo(() => {
+    const sorted = [...filteredProducts];
+    switch (sortBy) {
+      case "price_asc":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+      case "price_desc":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+      case "name_asc":
+        sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "name_desc":
+        sorted.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+    }
+    return sorted;
+  }, [filteredProducts, sortBy]);
 
   
   function toggleCategory(id: number) {
@@ -86,8 +106,23 @@ export default function ProductsClient({
         </div>
 
         {/* Grid de productos */}
-        <div className="w-full md:w-4/5 flex items-center justify-center">
-          <ProductGrid products={filteredProducts} />
+        <div className="w-full md:w-4/5">
+          <div className="flex justify-end mb-4">
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="border rounded-lg px-3 py-2 bg-white"
+            >
+              <option value="">Ordenar por...</option>
+              <option value="price_asc">Precio: menor a mayor</option>
+              <option value="price_desc">Precio: mayor a menor</option>
+              <option value="name_asc">Nombre: A-Z</option>
+              <option value="name_desc">Nombre: Z-A</option>
+            </select>
+          </div>
+          <div className="flex items-center justify-center">
+            <ProductGrid products={sortedProducts} />
+          </div>
         </div>
       </div>
     </section>

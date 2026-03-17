@@ -1,16 +1,22 @@
+"use client";
+
+import { useState } from "react";
 import BackButton  from "@/components/common/ui/buttons/BackButton";
 import ImagesGalery from "@/components/products/ImageGalery";
 import AddCartButton from "@/components/common/ui/buttons/AddCartButton";
-import { notFound } from "next/navigation";
 import { ProductDTO } from "@/types";
 
 interface Props {
   product: ProductDTO;
 }
 
-export default async function ProductPage({ product }: Props) {
-
-  if (!product) notFound();
+export default function ProductPage({ product }: Props) {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const MAX_LENGTH = 150;
+  const isLongDescription = product.description.length > MAX_LENGTH;
+  const displayDescription = isLongDescription && !showFullDescription
+    ? product.description.slice(0, MAX_LENGTH) + "..."
+    : product.description.replace(/\.\.\.$/, '');
 
   console.log("ProductDetail -> product", product);
 
@@ -32,7 +38,16 @@ export default async function ProductPage({ product }: Props) {
             </h1>
 
             <p className="text-lg mt-3 text-center font-medium">
-              {product.description}
+              {displayDescription}
+            
+              {isLongDescription && (
+                <button
+                  onClick={() => setShowFullDescription(!showFullDescription)}
+                  className="ms-4 text-cyan-600 hover:text-cyan-800 text-sm mt-1 font-semibold cursor-pointer"
+                >
+                  {showFullDescription ? "Ver menos" : "Leer más"}
+                </button>
+              )}
             </p>
           </div>
 

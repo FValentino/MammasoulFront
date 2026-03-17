@@ -10,7 +10,9 @@ interface CardProps {
 
 export default function ProductCard({ product }: CardProps) {
 
-  const mainImage = product.product_images ? product.product_images.find(img => img.is_representative)?.url || product.product_images[0].url : "";
+  const mainImage = product.product_images && product.product_images.length > 0
+    ? product.product_images.find(img => img.is_representative)?.url || product.product_images[0]?.url
+    : null;
   
   const buttons: ReactNode[] = [
     <AddToCartButton product={{...product, quantity: 1, subtotal: product.price}}/>,
