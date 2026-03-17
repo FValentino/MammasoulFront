@@ -77,7 +77,7 @@ export default function BannerSlider({allBanners}: Props) {
             src={banners[current].imageUrl}
             alt={`Banner ${banners[current].id}`}
             fill
-            className="object-cover md:object-contain"
+            className="object-contain"
             priority
           />
         </motion.div>
