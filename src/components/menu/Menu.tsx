@@ -39,7 +39,7 @@ export default function Menu( ) {
                 {isMenuOpen ? <X className="w-6 h-6 me-4" /> : <MenuIcon className="w-8 h-8 me-4"/>}
               </button>
               <Link href="/" className=" md:mx-auto ">
-                <Image src={logo} alt="logo mammasoul" className="w-[50%] mx-auto" />
+                <Image src={logo} alt="logo mammasoul" className="w-[50%] mx-auto" priority />
               </Link>
               <button className="text-xl cursor-pointer md:hidden"
                 onClick={()=>{
@@ -48,7 +48,7 @@ export default function Menu( ) {
                 }  
               >
                 <div className="w-8 relative h-auto">
-                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 end-0 bg-black rounded-full">
+                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 inset-e-0 bg-black rounded-full">
                   <span className="text-white text-xs w-full rounded-full"> 
                     {totalQuantity}  
                   </span>
@@ -73,7 +73,7 @@ export default function Menu( ) {
                 }  
               >
                 <div className="w-8 relative h-auto">
-                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 end-0 bg-black rounded-full">
+                  <div className="h-4 w-4 absolute flex items-center justify-center top-0 inset-e-0 bg-black rounded-full">
                   <span className="text-white text-xs w-full rounded-full"> 
                     {totalQuantity} 
                   </span>

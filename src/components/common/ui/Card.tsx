@@ -13,8 +13,8 @@ interface CardProps<T> {
 export default function Card<T>( { image, title, detail, buttons }: CardProps<T>) {
   return (
     <div className="w-60 bg-white h-full rounded-2xl flex flex-col border-[#313030] overflow-hidden relative mx-auto">
-      <div className="bg-[linear-gradient(135deg,#bdbfc1,#e8eaea)] flex items-center justify-center aspect-square relative w-full"> 
-        <Image src={image} alt={title} fill />
+      <div className="w-full h-60 bg-[linear-gradient(135deg,#bdbfc1,#e8eaea)] flex items-center justify-center aspect-square relative "> 
+        <Image src={image} alt={title} fill className="w-full h-full object-cover" sizes="240px"/>
       </div>
 
       <div className=" mt-2 flex flex-col gap-2 p-2 h-full">
