@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect, useState } from "react";
 import styles from "./productDetail.module.css"
 import { Minus, Plus, X } from "lucide-react";
@@ -48,7 +50,7 @@ export default function ProductsDetail({index, product}: ProductsDetailProps) {
     >
       <div className="w-1/2 flex justify-around items-center ">
         <img
-          src={product? product.product_images[0].url : " " }
+          src={product? product.product_images[0].url : "https://es.vecteezy.com/arte-vectorial/22059000-no-imagen-disponible-icono" }
           alt="Product"
           className="w-16 h-16 object-cover rounded-lg"
         />
