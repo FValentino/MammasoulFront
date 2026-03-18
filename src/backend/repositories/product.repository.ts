@@ -17,10 +17,13 @@ export class ProductRepository {
 
   static async findAll(): Promise<ProductDTO[]> {
     const repo = await this.getRepo();
-    const products = await repo.find({
-      relations: ["product_images", "category"],
-      order: { id: "DESC" },
-    });
+    const products = await repo
+      .createQueryBuilder("product")
+      .leftJoin("product.product_images", "image")
+      .where("image.id IS NOT NULL")
+      .groupBy("product.id")
+      .orderBy("product.id", "DESC")
+      .getMany();
 
     return products.map((product: Product) => mapProductToDTO(product));
   }
@@ -40,10 +43,13 @@ export class ProductRepository {
 
   static async findActive(): Promise<ProductDTO[] | null> {
     const repo = await this.getRepo();
-    const products = await repo.find({
-      where: { is_active: true},
-      relations: ["product_images", "category"],
-    });
+    const products = await repo
+      .createQueryBuilder("product")
+      .leftJoin("product.product_images", "image")
+      .where("product.is_active = :isActive", { isActive: true })
+      .andWhere("image.id IS NOT NULL")
+      .groupBy("product.id")
+      .getMany();
 
     if (!products) return null;
     return products.map((product) => mapProductToDTO(product));
@@ -51,10 +57,13 @@ export class ProductRepository {
 
   static async findFeatured(): Promise<ProductDTO[] | null> {
     const repo = await this.getRepo();
-    const products = await repo.find({
-      where: { is_feature: true},
-      relations: ["product_images", "category"],
-    });
+    const products = await repo
+      .createQueryBuilder("product")
+      .leftJoin("product.product_images", "image")
+      .where("product.is_feature = :isFeature", { isFeature: true })
+      .andWhere("image.id IS NOT NULL")
+      .groupBy("product.id")
+      .getMany();
 
     if (!products) return null;
     return products.map((product) => mapProductToDTO(product));

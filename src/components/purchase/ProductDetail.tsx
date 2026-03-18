@@ -20,7 +20,7 @@ export default function ProductDetail({index, product}: ProductsDetailProps){
 
         <div className="w-16 h-16 object-cover rounded-lg relative" >
           {
-            product.product_images.length>0 
+            product.product_images.length > 0 
             ?
               <Image 
                 src={product.product_images?.[0].url} 
