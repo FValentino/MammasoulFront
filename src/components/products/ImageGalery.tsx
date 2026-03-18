@@ -17,7 +17,7 @@ export default function ProductGallery({ images }: ProductGalleryProps) {
 
   return (
     <div className="flex flex-col gap-4 md:flex-row">
-      <div className="w-20 flex flex-row gap-2 md:flex-col md:justify-between ">
+      <div className="w-full flex flex-row gap-2 md:w-20 md:flex-col md:justify-between ">
         {images.map((img, index) => (
           <button
             key={index}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useEffectEvent, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import CategorySelector from "@/components/products/CategorySelector";
@@ -107,7 +107,7 @@ export default function ProductsClient({
 
         {/* Grid de productos */}
         <div className="w-full md:w-4/5">
-          <div className="flex justify-end mb-4">
+          <div className="flex justify-center md:justify-end mb-4">
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
