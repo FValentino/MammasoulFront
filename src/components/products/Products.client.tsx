@@ -107,18 +107,24 @@ export default function ProductsClient({
 
         {/* Grid de productos */}
         <div className="w-full md:w-4/5">
-          <div className="flex justify-center md:justify-end mb-4">
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="border rounded-lg px-3 py-2 bg-white"
-            >
-              <option value="">Ordenar por...</option>
-              <option value="price_asc">Precio: menor a mayor</option>
-              <option value="price_desc">Precio: mayor a menor</option>
-              <option value="name_asc">Nombre: A-Z</option>
-              <option value="name_desc">Nombre: Z-A</option>
-            </select>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4 p-4 rounded-lg">
+            <div className="flex items-center gap-2">
+              <label htmlFor="sort-select" className="text-sm font-medium text-gray-700">
+                Ordenar por:
+              </label>
+              <select
+                id="sort-select"
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="border border-gray-300 rounded-lg px-3 py-2 bg-white min-w-45"
+              >
+                <option value="">Todos</option>
+                <option value="price_asc">Precio: menor a mayor</option>
+                <option value="price_desc">Precio: mayor a menor</option>
+                <option value="name_asc">Nombre: A-Z</option>
+                <option value="name_desc">Nombre: Z-A</option>
+              </select>
+            </div>
           </div>
           <div className="flex items-center justify-center">
             <ProductGrid products={sortedProducts} />
