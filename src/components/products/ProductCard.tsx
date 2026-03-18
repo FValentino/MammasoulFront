@@ -10,7 +10,7 @@ interface CardProps {
 
 export default function ProductCard({ product }: CardProps) {
 
-  const mainImage = product.product_images && product.product_images.length > 0
+  const mainImage = product.product_images?.length
     ? product.product_images.find(img => img.is_representative)?.url || product.product_images[0]?.url
     : null;
   

@@ -24,9 +24,9 @@ export function mapProductToDTO(product: any): ProductDTO {
     // Mapeo seguro de imágenes
     product_images: (product.product_images || []).map((img: any) => ({
       product_id: product.id,
-      id: img.id,
-      url: img.url,
-      is_representative: Boolean(img.is_representative),
+      id: img?.id ?? 0,
+      url: img?.url ?? "",
+      is_representative: Boolean(img?.is_representative),
     })),
 
     // Mapeo seguro de categoría
@@ -42,21 +42,16 @@ export function mapProductToDTO(product: any): ProductDTO {
 }
 
 export function mapToListDTO(product: ProductDTO): GenericProductListDTO {
-  let image: ProductImageDTO = product.product_images[0];
-
-  if (!image) {
-    image =  product.product_images[0];
-  }
-
+  const firstImage = product.product_images?.[0];
 
   return {
     id: product.id,
     name: product.name,
     price: Number(product.price),
     is_active: Boolean(product.is_active),
-    product_image: {
-      id: image.id,
-      url: image.url
-    }
+    product_image: firstImage ? {
+      id: firstImage.id,
+      url: firstImage.url
+    } : null
   };
 }
