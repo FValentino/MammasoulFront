@@ -17,12 +17,21 @@ export default function ProductDetail({index, product}: ProductsDetailProps){
           transition={{ delay: index * 0.1 }}
     >
       <div className="flex justify-around items-center ">
+
         <div className="w-16 h-16 object-cover rounded-lg relative" >
-          <Image 
-            src={product.product_images? product.product_images[0].url : " " } 
-            alt={`imagen de ${product.name}`} 
-            fill
-          />
+          {
+            product.product_images.length>0 
+            ?
+              <Image 
+                src={product.product_images?.[0].url} 
+                alt={`imagen de ${product.name}`} 
+                fill
+              />
+            :
+              <p> No hay imagenes disponibles en este momento </p>  
+            
+          }
+          
         </div>
         
         <div className="flex-1 ms-2">

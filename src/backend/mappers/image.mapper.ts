@@ -8,8 +8,8 @@ export class ProductImageMapper {
   ): CreateProductImageDTO[] {
     return images.map((img) => ({
       product_id,
-      url: img.url,
-      is_representative: img.is_representative,
+      url: img?.url ?? "",
+      is_representative: Boolean(img?.is_representative),
     }))
   }
 }
