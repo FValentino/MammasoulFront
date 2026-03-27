@@ -17,8 +17,6 @@ export default async function Products({ searchParams }: Props) {
 
   const initialSelectedCategories = categoria ? categoria.split(",") : [];
 
-  console.log("Initial selected categories:", initialSelectedCategories);
-
   return (
     <ProductsClient
       initialProducts={products}
