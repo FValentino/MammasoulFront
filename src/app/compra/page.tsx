@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react";
 import BackButton from "@/components/common/ui/buttons/BackButton";
 import NavigationButton from "@/components/common/ui/buttons/NavigationButton";
 import ProductDetail from "@/components/purchase/ProductDetail";
@@ -10,7 +11,6 @@ import { useRouter } from "next/navigation";
 export default function Purchase(){
 
   const {cart, total} = useCart();
-
   const router = useRouter();
 
   const handlerConfirm = ()=>{

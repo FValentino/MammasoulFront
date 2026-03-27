@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, type Relation } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, type Relation, CreateDateColumn } from "typeorm";
 import { Category } from "./Category";
 import { ProductImage } from "./ProductImage";
 import { PurchaseDetail } from "./PurchaseDetail";
@@ -37,6 +37,9 @@ export class Product {
 
   @Column({ unique: true })
   slug!: string;
+
+  @CreateDateColumn()
+  created_at!: Date;
 
   @ManyToOne(()=>Category, (category)=>category.products, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "category_id" })

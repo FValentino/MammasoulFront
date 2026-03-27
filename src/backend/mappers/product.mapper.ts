@@ -20,6 +20,7 @@ export function mapProductToDTO(product: any): ProductDTO {
     in_sale: Boolean(product.in_sale),
     sale: product.sale ? Number(product.sale) : null,
     slug: product.slug,
+    created_at: product.created_at?.toString() ?? undefined,
 
     // Mapeo seguro de imágenes
     product_images: (product.product_images || []).map((img: any) => ({

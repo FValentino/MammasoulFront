@@ -21,6 +21,17 @@ export class PurchaseRepository {
     });
   }
 
+  static async findByEmail(email: string): Promise<Purchase[]> {
+    const repo = await this.getRepo();
+    const purchases = await repo
+      .createQueryBuilder("purchase")
+      .innerJoin("purchase.visitor", "visitor")
+      .where("visitor.email = :email", { email })
+      .orderBy("purchase.purchase_date", "DESC")
+      .getMany();
+    return purchases;
+  }
+
   static async findAll(): Promise<Purchase[]> {
     const repo = await this.getRepo();
     return await repo.find({

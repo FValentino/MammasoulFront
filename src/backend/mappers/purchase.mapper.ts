@@ -42,3 +42,7 @@ export class PurchaseMapper {
     };
   }
 }
+
+export function mapPurchaseToDTO(purchase: any, details?: any[]) {
+  return PurchaseMapper.toDTO(purchase);
+}

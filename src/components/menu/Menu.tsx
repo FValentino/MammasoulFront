@@ -30,7 +30,6 @@ export default function Menu( ) {
               <Link href="/contacto" onClick={closeMenu} className={`font-medium ${isMenuOpen ? 'text-xl' : ''}`}>
                 Contacto
               </Link>
-              
             </div>
 
             <div className={`${isMenuOpen ? 'flex justify-between items-center border-b-2 pb-2' 

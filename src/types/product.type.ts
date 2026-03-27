@@ -22,6 +22,7 @@ export interface ProductDTO {
   is_feature: boolean;
   in_sale: boolean;
   sale: number | null;
+  created_at?: string;
 
   product_images: ProductImageDTO[];
   categories: CategoryDTO;

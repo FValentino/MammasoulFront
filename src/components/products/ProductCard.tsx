@@ -16,7 +16,7 @@ export default function ProductCard({ product }: CardProps) {
   
   const buttons: ReactNode[] = [
     <AddToCartButton product={{...product, quantity: 1, subtotal: product.price}} key={`cartbutton-${product.id}`}/>,
-    <NavigationButton href={`/productos/${product.slug}`} label="Ver producto" key={`cartbutton-${product.id}`}/>
+    <NavigationButton href={`/productos/${product.slug}`} label="Ver producto" key={`navbutton-${product.id}`}/>
   ];
 
   return (
