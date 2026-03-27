@@ -10,6 +10,8 @@ interface Props{
 
 export default function ProductCarouselClient( {products}: Props ) {
 
+  console.log("Products carousel: ", products)
+
   return (
     <>
       <Carousel<ProductDTO>

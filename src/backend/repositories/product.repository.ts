@@ -59,13 +59,15 @@ export class ProductRepository {
     const repo = await this.getRepo();
     const products = await repo
       .createQueryBuilder("product")
-      .leftJoin("product.product_images", "image")
+      .leftJoinAndSelect("product.product_images", "image")
       .where("product.is_feature = :isFeature", { isFeature: true })
+      .andWhere("product.is_active = :isActive", { isActive: true })
       .andWhere("image.id IS NOT NULL")
-      .groupBy("product.id")
       .getMany();
 
     if (!products) return null;
+
+    console.log("Featured products repo: ", products)
     return products.map((product) => mapProductToDTO(product));
   }
 
