@@ -38,9 +38,6 @@ export class Product {
   @Column({ unique: true })
   slug!: string;
 
-  @CreateDateColumn()
-  created_at!: Date;
-
   @ManyToOne(()=>Category, (category)=>category.products, { onDelete: 'CASCADE' })
   @JoinColumn({ name: "category_id" })
   category!: Relation<Category>;
