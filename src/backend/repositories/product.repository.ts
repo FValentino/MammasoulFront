@@ -19,11 +19,10 @@ export class ProductRepository {
     const repo = await this.getRepo();
     const products = await repo
       .createQueryBuilder("product")
-      .leftJoin("product.product_images", "image")
-      .where("image.id IS NOT NULL")
-      .groupBy("product.id")
-      .orderBy("product.id", "DESC")
+      .leftJoinAndSelect("product.product_images", "image")
+      .andWhere("image.id IS NOT NULL")
       .getMany();
+
 
     return products.map((product: Product) => mapProductToDTO(product));
   }

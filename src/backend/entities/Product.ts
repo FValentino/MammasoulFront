@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, type Relation, CreateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany, JoinColumn, type Relation } from "typeorm";
 import { Category } from "./Category";
 import { ProductImage } from "./ProductImage";
 import { PurchaseDetail } from "./PurchaseDetail";

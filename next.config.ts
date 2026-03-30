@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
         pathname: "/storage/v1/object/public/**",
       },
     ],
+    domains: ['upload.wikimedia.org'],
   },
   allowedDevOrigins: [
     "http://localhost:3000",

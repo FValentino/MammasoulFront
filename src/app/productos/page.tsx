@@ -14,6 +14,9 @@ export default async function Products({ searchParams }: Props) {
 
   const { categoria } = await searchParams;
 
+  console.log("PRODUCTS PAGE: ", products)
+  console.log("PRODUCTS IMAGES: ", products.map(products => products.product_images))
+
 
   const initialSelectedCategories = categoria ? categoria.split(",") : [];
 
