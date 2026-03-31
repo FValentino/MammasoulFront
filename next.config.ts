@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
         pathname: "/storage/v1/object/public/**",
       },
     ],
-    domains: ['upload.wikimedia.org', 'https://vqoxdndipnhmhenmwkfn.supabase.co'],
+    domains: ['upload.wikimedia.org', 'vqoxdndipnhmhenmwkfn.supabase.co'],
   },
   allowedDevOrigins: [
     "http://localhost:3000",
