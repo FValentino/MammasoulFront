@@ -7,8 +7,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "vqoxdndipnhmhenmwkfn.supabase.co",
-        pathname: "/storage/v1/object/public/**",
+        hostname: "vqoxdndipnhmhenmwkfn.supabase.co"
       },
     ],
     domains: ['upload.wikimedia.org', 'vqoxdndipnhmhenmwkfn.supabase.co'],
