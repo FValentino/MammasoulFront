@@ -34,8 +34,6 @@ export class ProductRepository {
       relations: ["product_images", "category"],
     });
 
-    console.log("FIND PRODUCT REPOSITORY: ", product)
-
     if (!product) return null;
     return mapProductToDTO(product);
   }
