@@ -2,6 +2,8 @@ import { getCategories } from "@/actions/category.actions";
 import { getProducts } from "@/actions/product.action";
 import ProductsClient from "@/components/products/Products.client";
 
+export const revalidate = 0;
+
 interface Props {
   searchParams: Promise< {
     categoria?: string;

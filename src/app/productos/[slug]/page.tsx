@@ -2,6 +2,8 @@ import { getProductBySlug } from "@/actions/product.action";
 import ProductDetail from "@/components/products/ProductDetail";
 import { notFound } from "next/navigation";
 
+export const revalidate = 0;
+
 interface Props {
   params: Promise<{
     slug: string;
